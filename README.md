@@ -42,4 +42,4 @@ Como estudiante, puedes interactuar con los cursos y las tareas asignadas. Tus f
 - **Frontend**: React
 ## Licencia
 
-Este proyecto está licenciado bajo la Licencia de ME.
+Este proyecto está licenciado bajo la Licencia de Yo.
