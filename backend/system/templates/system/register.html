@@ -7,8 +7,10 @@
 </head>
 <body>
   <h1>Registro</h1>
-  {% csrf_token %}
-  {{form.as_p}}
-  <button type="submit">Registrar</button>
+  <form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Registrar</button>
+  </form>
 </body>
 </html>

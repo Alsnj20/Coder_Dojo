@@ -42,7 +42,15 @@ def register_view(request):
         if form.is_valid():
             form.save()
             return redirect('home')
+        print(form.errors)
     elif request.method == 'GET':
         form = RegisterForm()
     return render(request, 'system/register.html', {'form': form})
     
+def list_estudiantes_view(request):
+    estudiantes = Usuario.objects.filter(tipo=Usuario.Types.STUDENT)
+    return render(request, 'system/list_estudiantes.html', {'estudiantes': estudiantes})
+
+def list_docentes_view(request):
+    docentes = Usuario.objects.filter(tipo=Usuario.Types.TEACHER)
+    return render(request, 'system/list_docentes.html', {'docentes': docentes})

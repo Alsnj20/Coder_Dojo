@@ -7,8 +7,10 @@
 </head>
 <body>
   <h1>Cerrar Sesión</h1>
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Iniciar Sesión</button>
+  <form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Iniciar Sesión</button>
+  </form>
 </body>
 </html>

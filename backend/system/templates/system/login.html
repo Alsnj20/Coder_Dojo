@@ -7,10 +7,12 @@
 </head>
 <body>
   <h1>Iniciar Sesión</h1>
-  {% csrf_token %}
-  <table>
-    {{form.as_table}}
-  </table>
-  <button type="submit">Iniciar Sesión</button>
+  <form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <table>
+      {{form.as_table}}
+    </table>
+    <button type="submit">Iniciar Sesión</button>
+  </form>
 </body>
 </html>

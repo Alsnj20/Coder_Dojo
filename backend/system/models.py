@@ -11,7 +11,7 @@ class UsuarioManager(BaseUserManager):
     norm_email = self.normalize_email(email)
     usuario = self.model(
       username = norm_email,
-      email = norm_email
+      email = norm_email,
     )
     usuario.set_password(password)
     usuario.save(using=self._db)
@@ -36,7 +36,7 @@ class Usuario(AbstractUser):
     choices=Types.choices,
   )
 
-  objects = UsuarioManager
+  objects = UsuarioManager()
   REQUIRED_FIELDS = []
   USERNAME_FIELD = 'email'
 
