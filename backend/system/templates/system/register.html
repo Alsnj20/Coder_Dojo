@@ -6,6 +6,11 @@
   <title>Register</title>
 </head>
 <body>
-  
+  <h1>Registro</h1>
+  {% csrf_token %}
+  <table>
+    {{form.as_table}}
+  </table>
+  <button type="submit">Registrarse</button>
 </body>
 </html>
