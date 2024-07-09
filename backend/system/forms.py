@@ -1,3 +1,4 @@
+from django.db import models
 from django import forms
 from django.forms import ModelForm
 from .models import Usuario, Curso, Tarea, Entrega
@@ -30,6 +31,24 @@ class UsuarioForm(ModelForm):
     if commit:
       user.save()
     return user
+
+class RegisterForm(UsuarioForm):
+  class Types(models.TextChoices):
+    STUDENT = 'ST', 'Estudiante'
+    TEACHER = 'TC', 'Profesor'
+
+  tipo = forms.ChoiceField(label='Tipo de usuario', choices=Types.choices)
+
+  class Meta:
+    model = Usuario
+    fields = ['email', 'name']
+
+  def save(self, commit=True):
+    user = super().save(commit=False)
+    user.tipo = self.cleaned_data['tipo']
+    if commit:
+      user.save()
+    return user    
 
 class EstudianteForm(UsuarioForm):
   class Meta:

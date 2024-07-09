@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import LoginForm, EstudianteForm
+from .forms import LoginForm, EstudianteForm, RegisterForm
 from .models import Usuario
 from django.contrib.auth import authenticate, login, logout
 
@@ -38,11 +38,11 @@ def create_estudiante_view(request):
 
 def register_view(request):
     if request.method == 'POST':
-        form = EstudianteForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('home')
     elif request.method == 'GET':
-        form = EstudianteForm()
+        form = RegisterForm()
     return render(request, 'system/register.html', {'form': form})
     
