@@ -14,9 +14,7 @@ Como administrador, puedes gestionar toda la plataforma. Tus funciones incluyen:
 Como profesor, tienes la capacidad de gestionar tus grupos y asignar tareas. Tus funciones incluyen:
 
 - **Crear Tareas**: Puedes crear tareas y asignarlas a los grupos que diriges.
-- **Gestionar Grupos**: Puedes enseñar en diferentes grupos, incluso si son para el mismo curso, pero no puedes pertenecer a más de un grupo para el mismo curso.
 - **Asignar Tareas**: Dentro de cada grupo, puedes crear una tarea con título, descripción y la opción de subir archivos. Luego, puedes asignar estas tareas a los grupos correspondientes.
-- **Eliminar Estudiantes de Grupos**: Puedes eliminar estudiantes de tus grupos, pero no completamente de la plataforma.
 
 ### Estudiante
 Como estudiante, puedes interactuar con los cursos y las tareas asignadas. Tus funciones incluyen:
