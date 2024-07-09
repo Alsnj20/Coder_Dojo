@@ -26,18 +26,6 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-def create_student_view(request):
-    if (request.user.is_authenticated and request.user.tipo == Usuario.Types.ADMIN):
-      if request.method == 'POST':
-          form = EstudianteForm(request.POST)
-          if form.is_valid():
-              form.save()
-              return redirect('home')
-      elif request.method == 'GET':
-          form = EstudianteForm()
-      return render(request, 'system/create_estudiante.html', {'form': form})
-    return HttpResponse('No tienes permisos para acceder a esta página')
-
 def register_view(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -49,11 +37,47 @@ def register_view(request):
     elif request.method == 'GET':
         form = RegisterForm()
     return render(request, 'system/register.html', {'form': form})
+
+def list_users_view(request):
+    if not request.user.is_authenticated or request.user.tipo != Usuario.Types.ADMIN:
+        return HttpResponse('No tienes permisos para acceder a esta página')
+    usuarios = Usuario.objects.all()
+    return render(request, 'system/list_users.html', {'usuarios': usuarios})
     
 def list_students_view(request):
     estudiantes = Usuario.objects.filter(tipo=Usuario.Types.STUDENT)
-    return render(request, 'system/list_estudiantes.html', {'estudiantes': estudiantes})
+    return render(request, 'system/list_students.html', {'estudiantes': estudiantes})
 
 def list_teachers_view(request):
     docentes = Usuario.objects.filter(tipo=Usuario.Types.TEACHER)
-    return render(request, 'system/list_docentes.html', {'docentes': docentes})
+    return render(request, 'system/list_teachers.html', {'docentes': docentes})
+
+def create_user_view(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('list_users')
+    elif request.method == 'GET':
+        form = RegisterForm()
+    return render(request, 'system/create_user.html', {'form': form})
+
+def user_detail_view(request, user_id):
+    user = Usuario.objects.get(id=user_id)
+    return render(request, 'system/user_detail.html', {'user': user})
+
+def user_edit_view(request, user_id):
+    user = Usuario.objects.get(id=user_id)
+    if request.method == 'POST':
+        form = EstudianteForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('list_users')
+    elif request.method == 'GET':
+        form = EstudianteForm(instance=user)
+    return render(request, 'system/create_user.html', {'form': form})
+
+def user_delete_view(request, user_id):
+    user = Usuario.objects.get(id=user_id)
+    user.delete()
+    return redirect('list_users')
