@@ -40,4 +40,32 @@ class Usuario(AbstractUser):
   USERNAME_FIELD = 'email'
 
   def __str__(self):
-    return self.email
+    return "{Name: "+ self.username+",Email: "+self.email+",Type: "+self.tipo+"}"
+  
+class Curso(models.Model):
+  nombre = models.CharField(max_length=50)
+  descripcion = models.TextField()
+  docente = models.ForeignKey(Usuario, limit_choices_to={'tipo': Usuario.Types.TEACHER}, on_delete=models.CASCADE)
+  estudiantes = models.ManyToManyField(Usuario, limit_choices_to={'tipo': Usuario.Types.STUDENT}, related_name='cursos')
+
+  def __str__(self):
+    return "{Course: "+ self.nombre+",Docente: "+self.docente.username+"}"
+  
+class Tarea(models.Model):
+  nombre = models.CharField(max_length=50)
+  descripcion = models.TextField()
+  curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+  fecha_entrega = models.DateTimeField()
+
+  def __str__(self):
+    return "{Task: "+ self.nombre+",Course: "+self.curso.nombre+"}"
+  
+class Entrega(models.Model):
+  tarea = models.ForeignKey(Tarea, on_delete=models.CASCADE)
+  estudiante = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+  enlace = models.URLField()
+  calificacion = models.FloatField(null=True, blank=True)
+
+  def __str__(self):
+    return "{Task: "+ self.tarea.nombre+",Student: "+self.estudiante.username+"}"
+  
