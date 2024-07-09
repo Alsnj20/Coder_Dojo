@@ -39,8 +39,8 @@ def register_view(request):
     return render(request, 'system/register.html', {'form': form})
 
 def list_users_view(request):
-    if not request.user.is_authenticated or request.user.tipo != Usuario.Types.ADMIN:
-        return HttpResponse('No tienes permisos para acceder a esta página')
+    #if not request.user.is_authenticated or request.user.tipo != Usuario.Types.ADMIN:
+    #    return HttpResponse('No tienes permisos para acceder a esta página')
     usuarios = Usuario.objects.all()
     return render(request, 'system/list_users.html', {'usuarios': usuarios})
     

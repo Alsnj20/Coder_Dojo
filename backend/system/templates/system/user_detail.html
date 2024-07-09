@@ -9,7 +9,7 @@
   <h1>Detalle de usuario</h1>
   <p>Nombre: {{ user.name }}</p>
 
-  <a href="{% url 'users:edit' user.id %}">Editar</a>
-  <a href="{% url 'users:delete' user.id %}">Eliminar</a>
+  <a href="{% url 'user_edit' user.id %}">Editar</a>
+  <a href="{% url 'user_delete' user.id %}">Eliminar</a>
 </body>
 </html>
