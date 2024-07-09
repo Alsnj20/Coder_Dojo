@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'system/home.html')
 
 def login_view(request):
     if request.method == 'POST':
@@ -20,7 +20,7 @@ def login_view(request):
                 return redirect('home')
     elif request.method == 'GET':
         form = LoginForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'system/login.html', {'form': form})
 
 def logout_view(request):
     logout(request)
@@ -34,6 +34,15 @@ def create_estudiante_view(request):
             return redirect('home')
     elif request.method == 'GET':
         form = EstudianteForm()
-    return render(request, 'create_estudiante.html', {'form': form})
+    return render(request, 'system/create_estudiante.html', {'form': form})
 
+def register_view(request):
+    if request.method == 'POST':
+        form = EstudianteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    elif request.method == 'GET':
+        form = EstudianteForm()
+    return render(request, 'system/register.html', {'form': form})
     
