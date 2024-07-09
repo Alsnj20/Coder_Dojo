@@ -30,9 +30,7 @@ def create_estudiante_view(request):
     if request.method == 'POST':
         form = EstudianteForm(request.POST)
         if form.is_valid():
-            instance = form.save(False)
-            instance.tipo = Usuario.Types.ESTUDIANTE
-            instance.save()
+            form.save()
             return redirect('home')
     elif request.method == 'GET':
         form = EstudianteForm()
