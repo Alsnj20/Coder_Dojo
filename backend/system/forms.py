@@ -2,6 +2,13 @@ from django import forms
 from django.forms import ModelForm
 from .models import Usuario, Curso, Tarea, Entrega
 
+class LoginForm(forms.Form):
+  email = forms.EmailField(label='Correo electrónico')
+  password = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+
+class LogoutForm(forms.Form):
+  pass
+
 class UsuarioForm(ModelForm):
   password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
   password2 = forms.CharField(label='Confirmar contraseña', widget=forms.PasswordInput)
