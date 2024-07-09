@@ -13,6 +13,7 @@ class UsuarioManager(BaseUserManager):
       username = norm_email,
       email = norm_email,
     )
+    print(usuario)
     usuario.set_password(password)
     usuario.save(using=self._db)
     return usuario
