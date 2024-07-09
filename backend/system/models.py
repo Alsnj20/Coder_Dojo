@@ -13,7 +13,6 @@ class UsuarioManager(BaseUserManager):
       username = norm_email,
       email = norm_email,
     )
-    print(usuario)
     usuario.set_password(password)
     usuario.save(using=self._db)
     return usuario
@@ -21,6 +20,7 @@ class UsuarioManager(BaseUserManager):
   def create_superuser(self, email, password):
     usuario = self.create_user(email, password)
     usuario.is_admin = True
+    usuario.tipo = Usuario.Types.ADMIN
     usuario.save(using=self._db)
     return usuario
 

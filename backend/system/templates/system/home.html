@@ -11,6 +11,12 @@
   <p>
     "Programación para todos: Coder Dojo" donde los jóvenes puedan explorar la codificación de una manera divertida y accesible.
   </p>
+  {% if user.is_authenticated %}
+    <p>¡Hola {{ user.email }}!</p>
+    <button><a href="{% url 'logout' %}">CERRAR SESIÓN</a></button>
+  {% else %}
+    <button><a href="{% url 'login' %}">INICIAR SESIÓN</a></button> 
+  {% endif %}
   <button><a>MAS INFORMACIÓN</a></button>
   <button><a href="{% url 'register' %}" >REGISTRASE</a></button
 </body>
