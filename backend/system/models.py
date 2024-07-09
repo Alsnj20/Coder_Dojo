@@ -30,6 +30,7 @@ class Usuario(AbstractUser):
     TEACHER = 'TC', 'Docente'
 
   email = models.EmailField(unique=True) #pk
+  name = models.CharField(max_length=50)
   tipo = models.CharField(
     max_length=2,
     choices=Types.choices,
