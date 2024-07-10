@@ -41,3 +41,14 @@ Como estudiante, puedes interactuar con los cursos y las tareas asignadas. Tus f
 ## Licencia
 
 Este proyecto está licenciado bajo la Licencia de Yo.
+
+## Conexion con el Frontend
+
+1. Instalar las dependencias necesarias (Django Rest Framework y Django Cors Headers):
+```bash
+pip install djangorestframework django-cors-headers
+```
+2. Archivo de requerimientos:
+```bash
+pip freeze > requirements.txt
+```
