@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoderDojo</title>
+</head>
+<body>
+  <h1>Coder Dojo</h1>
+  <p>hola :3</p>
+  <p>
+    "Programación para todos: Coder Dojo" donde los jóvenes puedan explorar la codificación de una manera divertida y accesible.
+  </p>
+  {% if user.is_authenticated %}
+    <p>¡Hola {{ user.email }}!</p>
+    <button><a href="{% url 'logout' %}">CERRAR SESIÓN</a></button>
+  {% else %}
+    <button><a href="{% url 'login' %}">INICIAR SESIÓN</a></button> 
+  {% endif %}
+  <button><a>MAS INFORMACIÓN</a></button>
+  <button><a href="{% url 'register' %}" >REGISTRASE</a></button
+</body>
+<footer> &copy; 2024 CoderDojo. Todos los derechos reservados</footer>
+</html>
