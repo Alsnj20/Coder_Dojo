@@ -7,11 +7,14 @@ class UsuarioSerializer(serializers.ModelSerializer):
     fields = ['id', 'email', 'name', 'tipo']
 
 class CursoSerializer(serializers.ModelSerializer):
+  docente = UsuarioSerializer(read_only=True)
+  estudiantes = UsuarioSerializer(read_only=True, many=True)
   class Meta:
     model = Curso
     fields = ['id', 'nombre', 'descripcion', 'docente', 'estudiantes']
 
 class TareaSerializer(serializers.ModelSerializer):
+  curso = CursoSerializer(read_only=True)
   class Meta:
     model = Tarea
     fields = ['id', 'nombre', 'descripcion', 'curso', 'fecha_entrega']

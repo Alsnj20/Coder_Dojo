@@ -81,3 +81,30 @@ def user_delete_view(request, user_id):
     user = Usuario.objects.get(id=user_id)
     user.delete()
     return redirect('list_users')
+
+# Frontend
+from rest_framework import viewsets
+from .models import Usuario, Curso, Tarea, Entrega
+from .serializers import UsuarioSerializer, CursoSerializer, TareaSerializer, EntregaSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+class UsuarioViewSet(viewsets.ModelViewSet):
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
+
+class CursoViewSet(viewsets.ModelViewSet):
+    queryset = Curso.objects.all()
+    serializer_class = CursoSerializer
+
+class TareaViewSet(viewsets.ModelViewSet):
+    queryset = Tarea.objects.all()
+    serializer_class = TareaSerializer
+
+class EntregaViewSet(viewsets.ModelViewSet):
+    queryset = Entrega.objects.all()
+    serializer_class = EntregaSerializer
+
+@api_view(['GET'])
+def hello_world(request):
+    return Response({'message': 'Hello, world!'})
