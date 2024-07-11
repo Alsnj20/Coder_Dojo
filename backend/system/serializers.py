@@ -4,11 +4,18 @@ from .models import Usuario, Curso, Tarea, Entrega
 class UsuarioSerializer(serializers.ModelSerializer):
   class Meta:
     model = Usuario
-    fields = ['id', 'email', 'name', 'tipo', 'password']
+    fields = ['id', 'name', 'email', 'password', 'tipo',]
     extra_kwargs = {'password': {'write_only': True}}
 
   def create(self, validated_data):
-    return super().create(validated_data)
+    user = Usuario.objects.create_user(
+      email=validated_data['email'],
+      password=validated_data['password']
+    )
+    user.name = validated_data['name']
+    user.tipo = validated_data['tipo']
+    user.save()
+    return user
   
 class CursoSerializer(serializers.ModelSerializer):
   docente = UsuarioSerializer(read_only=True)
