@@ -22,9 +22,10 @@ urlpatterns = [
     path('students/', views.list_students_view, name='students'),
     path('teachers/', views.list_teachers_view, name='teachers'),
     path('prueba/', views.hello_world, name='hello_world'),
+    
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/register/', views.RegisterView.as_view(), name='register'),
     path('api/login/', views.LoginView.as_view(), name='login'),
-    path('api/admin/', views.AdminCheckView.as_view(), name='admin_check')
+    path('api/admin/', views.AdminCheckView.as_view(), name='admin')
 ]
