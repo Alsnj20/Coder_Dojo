@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import User from "./User";
-
-function ListUsers() {
+function ListUsers({ user }) {
+  console.log('User')
   const [users, setUsers] = useState([])
 
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/system/user/list/');
+        const response = await axios.get('http://localhost:8000/system/user/list/', user);
         setUsers(response.data);
 
       } catch (error) {
@@ -31,4 +31,9 @@ function ListUsers() {
     </div>
   );
 }
+
+// ListUsers.prototype = {
+//   user: PropTypes.string.isRequired
+// }
+
 export default ListUsers
