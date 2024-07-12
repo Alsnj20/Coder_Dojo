@@ -31,3 +31,12 @@ class LoginView(APIView):
       return Response({"message": "Usuario autenticado", "user": UsuarioSerializer(user).data})
     else:
       return Response({"message": "Usuario no autenticado"}, status=status.HTTP_401_UNAUTHORIZED)
+    
+class UsersView(APIView):
+  permission_classes = [permissions.AllowAny]
+
+  def get(self, request):
+    users = Usuario.objects.exclude(tipo='AD')
+    serializer = UsuarioSerializer(users, many=True)
+    print(serializer.data)
+    return Response(serializer.data, status=status.HTTP_200_OK)

@@ -12,4 +12,7 @@ urlpatterns = [
   path("system-auth/", include("rest_framework.urls", namespace="rest_framework")), 
   # Login
   path("system/user/login/", views.LoginView.as_view(), name="login"),
+
+  # Usuarios
+  path("system/user/list/", views.UsersView.as_view(), name="user_list"),
 ]
