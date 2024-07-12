@@ -75,7 +75,7 @@ const LoginUser = () => {
           </button>
         </form>
         <p className='text-center mt-4'>
-          ¿No tienes una cuenta? <Link to="/">Registrarse</Link>
+          ¿No tienes una cuenta? <Link to="/register">Registrarse</Link>
         </p>
         <p className='text-center mt-4 text-green-500'>
           {userType === 'ST' ? 'Estudiante' : userType === 'PR' ? 'Profesor' : 'Acceso denegado'}
