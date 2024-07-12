@@ -38,7 +38,8 @@ function RegisterUser() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
         <h1 className='text-3xl font-bold text-center mb-2 text-blue-800'>Welcome CoderDojo 📚</h1>
-        <h2 className="text-3xl font-bold text-center mb-4">Registrate</h2>
+        <h2 className="text-3xl font-bold text-center mb-0">Registrate</h2>
+        <p className='text-center text-gray-500 mb-5'>Crea una cuenta como estudiante o docente</p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
