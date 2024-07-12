@@ -8,29 +8,30 @@ const LoginUser = () => {
     email: '',
     password: ''
   });
-
-  console.log(history);
-
   const [userType, setUserType] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:8000/system/user/login/', formData);
-      const userT = response.data.user.tipo;
+      const userA = response.data.user;
+      const userT = userA.tipo;
       setUserType(userT);
 
       if (userT === 'ST') {
-        navigate('/student');
+        navigate('/student', {state: userA});
       } else if (userT === 'TC') {
-        navigate('/teacher');
+        navigate('/teacher', {state: userA});
+      }else if (userT === 'AD'){
+        console.log('Admin', userA)
+        navigate('/admin', {state: userA})
       }else{
-        navigate('/home')
+        setUserType(null);
+        navigate('/')
       }
 
     } catch (error) {

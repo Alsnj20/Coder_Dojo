@@ -20,12 +20,16 @@ function RegisterUser() {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:8000/system/user/register/', formData);
-      console.log("Data: ", response.data);
-      const userT = response.data.tipo;
+      const userA = response.data
+      const userT = userA.tipo;
+
       if (userT === 'ST') {
-        navigate('/student');
+        navigate('/student', {state: userA});
       } else if (userT === 'TC') {
-        navigate('/teacher');
+        navigate('/teacher', {state: userA});
+      }else if (userT === 'AD'){
+        console.log('Admin', userA)
+        navigate('/admin', {state: userA})
       }else{
         navigate('/')
       }
