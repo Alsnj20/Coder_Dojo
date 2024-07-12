@@ -20,6 +20,8 @@ class UsuarioManager(BaseUserManager):
   def create_superuser(self, email, password):
     usuario = self.create_user(email, password)
     usuario.is_admin = True
+    usuario.is_superuser = True
+    usuario.is_staff = True
     usuario.tipo = Usuario.Types.ADMIN
     usuario.save(using=self._db)
     return usuario
@@ -42,7 +44,7 @@ class Usuario(AbstractUser):
   USERNAME_FIELD = 'email'
 
   def __str__(self):
-    return "{Name: "+ self.username+",Email: "+self.email+",Type: "+self.tipo+"}"
+    return "{Name: "+ self.username+",Email: "+self.email+"Password: "+self.password+",Type: "+self.tipo+"}"
   
 class Curso(models.Model):
   nombre = models.CharField(max_length=50)
