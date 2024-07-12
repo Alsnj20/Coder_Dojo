@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function RegisterUser() {
   const [formData, setFormData] = useState({
@@ -9,7 +10,7 @@ function RegisterUser() {
     tipo: 'ST',
     password: ''
   });
-
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,6 +21,14 @@ function RegisterUser() {
     try {
       const response = await axios.post('http://localhost:8000/system/user/register/', formData);
       console.log("Data: ", response.data);
+      const userT = response.data.tipo;
+      if (userT === 'ST') {
+        navigate('/student');
+      } else if (userT === 'TC') {
+        navigate('/teacher');
+      }else{
+        navigate('/')
+      }
     } catch (error) {
       console.error('Error al registrar usuario:', error);
     }

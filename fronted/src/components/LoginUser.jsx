@@ -27,7 +27,7 @@ const LoginUser = () => {
 
       if (userT === 'ST') {
         navigate('/student');
-      } else if (userT === 'PR') {
+      } else if (userT === 'TC') {
         navigate('/teacher');
       }else{
         navigate('/home')
