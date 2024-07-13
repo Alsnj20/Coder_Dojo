@@ -1,5 +1,6 @@
 import AdminUsersCard from "./AdminUsersCard";
 import AdminUsers from "./AdminUsers";
+import AdminCourse from "./AdminCourse";
 function AdminMain() {
   return (
     <main className="flex-1">
@@ -23,11 +24,10 @@ function AdminMain() {
         <div className="space-y-4">
           <h2 className="text-2xl font-bold">Usuarios</h2>
           <p className="text-gray-500">View and manage all users in your Coder Dojo platform.</p>
-          <div className="rounded-lg bg-red-500">
-            <AdminUsers />
-          </div>
+          <AdminUsers />
         </div>
       </section>
+      <AdminCourse />
     </main>
   )
 }

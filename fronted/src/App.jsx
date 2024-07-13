@@ -11,6 +11,7 @@ import LoginUser from './components/LoginUser'
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Admin from './designUI/Admin/Admin'
+import Home from './designUI/Home/Home'
 function App() {
   return (
     <Admin/>
