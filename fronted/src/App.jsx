@@ -14,7 +14,7 @@ import Admin from './designUI/Admin/Admin'
 import Home from './designUI/Home/Home'
 function App() {
   return (
-    <Admin/>
+    <Home/>
   )
 }
 

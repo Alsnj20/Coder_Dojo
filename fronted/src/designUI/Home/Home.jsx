@@ -4,9 +4,8 @@ import HomeNavigation from './HomeNavigation';
 import HomeMain from './HomeMain';
 import HomeFooter from './HomeFooter';
 function Home() {
-  const [isDark, setIsDark] = useState(false);
   return (
-    <div className={`bg-background text-foreground ${isDark ?'dark': ''}`}>
+    <div>
       <HomeNavigation />
       <HomeMain />
       <HomeFooter />
