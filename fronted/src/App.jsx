@@ -10,10 +10,10 @@ import LoginUser from './components/LoginUser'
 
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './designUI/Home/Home'
+import Admin from './designUI/Admin/Admin'
 function App() {
   return (
-    <Home/>
+    <Admin/>
   )
 }
 
