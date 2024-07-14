@@ -4,7 +4,7 @@ function HomeNavigation({isDarkMode, setIsDarkMode}) {
   return (
     <header className="bg-primary-light text-text-light dark:bg-primary-dark dark:text-text-dark py-6 px-6 shadow-md flex justify-between items-center">
       <div className="flex items-center gap-4">
-        <a href="#" className="flex items-center">
+        <a href="" className="flex items-center">
           <span className="text-2xl font-bold">
             <i className="text-3xl text-text-light dark:text-text-dark bx bx-code-alt"></i> CoderDojo
           </span>
@@ -24,14 +24,14 @@ function HomeNavigation({isDarkMode, setIsDarkMode}) {
           <span className="sr-only">Toggle dark mode</span>
         </button>
         <a
-          href="#"
+          href="register/"
           className="bg-text-light h-8 text-primary-light px-4 py-2 rounded-md hover:bg-secondary-light dark:bg-text-dark dark:text-primary-dark dark:hover:bg-secondary-dark flex items-center gap-2"
         >
           <i className="text-lg bx bx-user-plus"></i>
           Register
         </a>
         <a
-          href="#"
+          href="login/"
           className="bg-text-light h-8 text-primary-light px-4 py-2 rounded-md hover:bg-secondary-light dark:bg-text-dark dark:text-primary-dark dark:hover:bg-secondary-dark flex items-center gap-2"
         >
           <i className="text-lg bx bx-log-in"></i>

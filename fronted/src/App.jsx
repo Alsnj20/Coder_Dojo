@@ -14,7 +14,17 @@ import Admin from './designUI/Admin/Admin'
 import Home from './designUI/Home/Home'
 function App() {
   return (
-    <Home/>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="register/" element={<RegisterUser />} />
+        <Route path="login/" element={<LoginUser />} />
+        <Route path="admin/" element={<HomeAdmin />} />
+        <Route path="teacher/" element={<HomeTeacher />} />
+        <Route path="list/" element={<ListUsers />} />
+        <Route path="student/" element={<HomeStudent />} />
+      </Routes>
+    </Router>
   )
 }
 

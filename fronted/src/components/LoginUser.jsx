@@ -23,13 +23,13 @@ const LoginUser = () => {
       setUserType(userT);
 
       if (userT === 'ST') {
-        navigate('/student', {state: userA});
+        navigate('/student', { state: userA });
       } else if (userT === 'TC') {
-        navigate('/teacher', {state: userA});
-      }else if (userT === 'AD'){
+        navigate('/teacher', { state: userA });
+      } else if (userT === 'AD') {
         console.log('Admin', userA)
-        navigate('/admin', {state: userA})
-      }else{
+        navigate('/admin', { state: userA })
+      } else {
         setUserType(null);
         navigate('/')
       }
@@ -41,11 +41,11 @@ const LoginUser = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
-        <h1 className='text-3xl font-bold text-center mb-2 text-blue-800'>Welcome CoderDojo 📚</h1>
-        <h2 className="text-3xl font-bold text-center mb-0.5">Iniciar Sesión</h2>
-        <p className='text-center text-gray-500 mb-5'>
+    <div className="flex items-center justify-center min-h-screen bg-secondary-light dark:bg-secondary-dark">
+      <div className="max-w-md w-full p-6 bg-card-light dark:bg-card-dark rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold text-center mb-2 text-primary-light dark:text-primary-dark">Welcome CoderDojo 📚</h1>
+        <h2 className="text-3xl font-bold text-center mb-0.5 text-primary-light dark:text-primary-dark">Iniciar Sesión</h2>
+        <p className="text-center text-muted-foreground mb-5">
           Ingresa tus credenciales para acceder a Coder Dojo
         </p>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -57,7 +57,7 @@ const LoginUser = () => {
               onChange={handleChange}
               placeholder="Correo electrónico"
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2 border border-secondary-light dark:border-secondary-dark rounded-md focus:outline-none focus:border-primary-light dark:focus:border-primary-dark"
             />
           </div>
           <div className="space-y-2">
@@ -68,20 +68,20 @@ const LoginUser = () => {
               onChange={handleChange}
               placeholder="Contraseña"
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2 border border-secondary-light dark:border-secondary-dark rounded-md focus:outline-none focus:border-primary-light dark:focus:border-primary-dark"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-900 text-white py-2 px-4 rounded-md hover:bg-blue-800 focus:outline-none focus:bg-blue-900"
+            className="w-full bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark py-2 px-4 rounded-md hover:bg-blue-900"
           >
             Iniciar sesión
           </button>
         </form>
-        <p className='text-center mt-4'>
-          ¿No tienes una cuenta? <Link to="/register">Registrarse</Link>
+        <p className="text-center mt-4 text-muted-foreground">
+          ¿No tienes una cuenta? <Link to="/register" className="text-primary-light dark:text-primary-dark">Registrarse</Link>
         </p>
-        <p className='text-center mt-4 text-green-500'>
+        <p className="text-center mt-4 text-green-500">
           {userType === 'ST' ? 'Estudiante' : userType === 'PR' ? 'Profesor' : 'Acceso denegado'}
         </p>
       </div>

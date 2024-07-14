@@ -15,7 +15,7 @@ function HomeMain() {
           </p>
           <div className="flex gap-4 items-center">
             <a
-              href="#"
+              href="register/"
               className="bg-primary-light text-white px-6 py-3 rounded-md hover:bg-primary-dark flex items-center gap-2"
             >
               <i className="text-lg bx bx-user-plus"></i>

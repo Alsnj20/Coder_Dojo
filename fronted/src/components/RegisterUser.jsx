@@ -39,11 +39,11 @@ function RegisterUser() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
-        <h1 className='text-3xl font-bold text-center mb-2 text-blue-800'>Welcome CoderDojo 📚</h1>
+    <div className="flex items-center justify-center min-h-screen bg-secondary-light dark:bg-secondary-dark">
+      <div className="max-w-md w-full p-6 bg-card-light dark:bg-card-dark rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold text-center mb-2 text-primary-light dark:text-primary-dark">Welcome CoderDojo 📚</h1>
         <h2 className="text-3xl font-bold text-center mb-0">Registrate</h2>
-        <p className='text-center text-gray-500 mb-5'>Crea una cuenta como estudiante o docente</p>
+        <p className="text-center text-muted-foreground mb-5">Crea una cuenta como estudiante o docente</p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -52,7 +52,7 @@ function RegisterUser() {
             onChange={handleChange}
             placeholder="Nombre"
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full px-3 py-2 border border-secondary-light dark:border-secondary-dark rounded-md focus:outline-none focus:border-primary-light dark:focus:border-primary-dark"
           />
           <input
             type="email"
@@ -61,7 +61,7 @@ function RegisterUser() {
             onChange={handleChange}
             placeholder="Correo electrónico"
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full px-3 py-2 border border-secondary-light dark:border-secondary-dark rounded-md focus:outline-none focus:border-primary-light dark:focus:border-primary-dark"
           />
           <input
             type="password"
@@ -70,30 +70,31 @@ function RegisterUser() {
             onChange={handleChange}
             placeholder="Contraseña"
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full px-3 py-2 border border-secondary-light dark:border-secondary-dark rounded-md focus:outline-none focus:border-primary-light dark:focus:border-primary-dark"
           />
           <select
             name="tipo"
             value={formData.tipo}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full px-3 py-2 border border-secondary-light dark:border-secondary-dark rounded-md focus:outline-none focus:border-primary-light dark:focus:border-primary-dark"
           >
             <option value="ST">Estudiante</option>
             <option value="TC">Docente</option>
           </select>
           <button
             type="submit"
-            className="w-full bg-blue-900 text-white py-2 px-4 rounded-md hover:bg-blue-800 focus:outline-none focus:bg-blue-900"
+            className="w-full bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark py-2 px-4 rounded-md hover:bg-blue-900"
           >
             Registrarse
           </button>
         </form>
-        <p className='text-center mt-4'>
-          ¿Ya tienes una cuenta? <Link to="/login">Inicia sesión</Link>
+        <p className="text-center mt-4 text-muted-foreground">
+          ¿Ya tienes una cuenta? <Link to="/login" className="text-primary-light dark:text-primary-dark">Inicia sesión</Link>
         </p>
       </div>
     </div>
   );
+    
 }
 
 
