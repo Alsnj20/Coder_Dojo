@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import HomeNavigation from './HomeNavigation';
 import HomeMain from './HomeMain';
 import HomeFooter from './HomeFooter';
+import AccessDenied from "../../components/AccessDenied";
 function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
