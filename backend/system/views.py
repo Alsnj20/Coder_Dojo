@@ -31,3 +31,33 @@ class LoginView(APIView):
       return Response({"message": "Usuario autenticado", "user": UsuarioSerializer(user).data})
     else:
       return Response({"message": "Usuario no autenticado"}, status=status.HTTP_401_UNAUTHORIZED)
+    
+class UsersView(APIView):
+  permission_classes = [permissions.AllowAny]
+
+  def get(self, request):
+    print("Datos: ",self, request.json())
+    users = Usuario.objects.exclude(tipo='AD')
+    serializer = UsuarioSerializer(users, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+  
+class UserDetailView(APIView):
+  permission_classes = [permissions.AllowAny]
+
+  def get(self, request, pk):
+    user = Usuario.objects.get(pk=pk)
+    serializer = UsuarioSerializer(user)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+  
+  def put(self, request, pk):
+    user = Usuario.objects.get(pk=pk)
+    serializer = UsuarioSerializer(user, data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+  
+  def delete(self, request, pk):
+    user = Usuario.objects.get(pk=pk)
+    user.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
