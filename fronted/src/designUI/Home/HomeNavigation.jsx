@@ -1,9 +1,8 @@
 import { useState } from 'react';
 
-function HomeNavigation() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+function HomeNavigation({isDarkMode, setIsDarkMode}) {
   return (
-    <header className="bg-primary-light text-text-light dark:bg-primary-dark dark:text-text-dark py-4 px-6 flex justify-between items-center">
+    <header className="bg-primary-light text-text-light dark:bg-primary-dark dark:text-text-dark py-6 px-6 shadow-md flex justify-between items-center">
       <div className="flex items-center gap-4">
         <a href="#" className="flex items-center">
           <span className="text-2xl font-bold">
@@ -18,26 +17,24 @@ function HomeNavigation() {
       </nav>
       <div className="flex items-center gap-4">
         <button
-          onClick={() => {
-            setIsDarkMode(!isDarkMode);
-            document.documentElement.classList.toggle('dark', !isDarkMode);
-          }}
+          onClick={() => setIsDarkMode(!isDarkMode)}
           className="rounded-full"
         >
           <i className={`w-8 h-8 text-2xl rounded-full hover:bg-text-light hover:text-primary-light dark:hover:bg-text-dark dark:hover:text-primary-dark ${isDarkMode ? 'bx bx-sun' : 'bx bx-moon'}`}></i>
+          <span className="sr-only">Toggle dark mode</span>
         </button>
         <a
           href="#"
           className="bg-text-light h-8 text-primary-light px-4 py-2 rounded-md hover:bg-secondary-light dark:bg-text-dark dark:text-primary-dark dark:hover:bg-secondary-dark flex items-center gap-2"
         >
-          <i className="text-lg bx bx-user-plus" style={{ color: '#0b2d5f' }}></i>
+          <i className="text-lg bx bx-user-plus"></i>
           Register
         </a>
         <a
           href="#"
           className="bg-text-light h-8 text-primary-light px-4 py-2 rounded-md hover:bg-secondary-light dark:bg-text-dark dark:text-primary-dark dark:hover:bg-secondary-dark flex items-center gap-2"
         >
-          <i className="text-lg bx bx-log-in" style={{ color: '#0b2d5f' }}></i>
+          <i className="text-lg bx bx-log-in"></i>
           Login
         </a>
       </div>
