@@ -1,4 +1,5 @@
 import AdminUsersCard from "./AdminUsersCard";
+import { Link } from "react-router-dom";
 function AdminMain() {
   return (
     <main className="flex-1">
@@ -8,12 +9,38 @@ function AdminMain() {
           <p className="text-gray-500">Bienvenido, Admin.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <h2 className="text-2xl font-bold col-span-full">Administrar Usuarios</h2>
-            <AdminUsersCard title="Usuarios" all="Ver Usuarios" add="Crear Usuario" url={"admin/users/"}>
-              Agrega, edita y elimina usuarios de la plataforma.
+
+            <AdminUsersCard title="Usuarios" info={'Agrega, edita y elimina usuarios de la plataforma.'}>
+              <Link to='users'>
+                <button
+                  className="inline-flex items-center gap-2 bg-[#0b2d5f] text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
+                >
+                  Ver Usuarios
+                </button>
+              </Link>
+              <Link to='users/create/'>
+                <button
+                  className="inline-flex items-center gap-2 bg-[#0b2d5f] text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
+                >
+                  Crear Usuario
+                </button>
+              </Link>
             </AdminUsersCard>
-            <h2 className="text-2xl font-bold col-span-full">Administrar Cursos</h2>
-            <AdminUsersCard title="Cursos" all="Ver Cursos" url ={"admin/courses/"} add="Crear Curso">
-              Agrega, edita y elimina cursos de la plataforma.
+            <AdminUsersCard title="Usuarios" info={'Agrega, edita y elimina cursos de la plataforma.'}>
+              <Link to='courses/'>
+                <button
+                  className="inline-flex items-center gap-2 bg-[#0b2d5f] text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
+                >
+                  Ver Usuarios
+                </button>
+              </Link>
+              <Link to='courses/create/'>
+                <button
+                  className="inline-flex items-center gap-2 bg-[#0b2d5f] text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
+                >
+                  Crear Usuario
+                </button>
+              </Link>
             </AdminUsersCard>
           </div>
         </div>

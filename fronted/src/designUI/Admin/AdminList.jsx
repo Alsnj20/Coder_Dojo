@@ -1,10 +1,10 @@
 import Card from './Utilities/';
-function AdminList({listObj = {}, title={}, children = {}}) {
+function AdminList() {
   return (
     <section className="container mx-auto py-12 px-6">
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{title}</h2>
-        <p className="text-gray-500">{children}</p>
+        <h2 className="text-2xl font-bold">Lista de Usuarios</h2>
+        <p className="text-gray-500"></p>
         <Card>
           <div className="overflow-x-auto">
             <table className="min-w-full bg-white">
