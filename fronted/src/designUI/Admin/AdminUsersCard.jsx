@@ -1,5 +1,5 @@
 
-function AdminUsersCard({ title, children, add, all }) {
+function AdminUsersCard({ title, children, add, all, url }) {
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
       <div>
@@ -7,13 +7,13 @@ function AdminUsersCard({ title, children, add, all }) {
         <p className="text-muted-foreground">{children}</p>
         <div className="mt-4 md:justify-end flex justify-center gap-2">
           <a
-            href="#"
+            href={url}
             className="inline-flex items-center gap-2 bg-[#0b2d5f] text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
           >
             {all}
           </a>
           <a
-            href="#"
+            href={url + "create/"}
             className="inline-flex items-center gap-2 bg-[#0b2d5f] text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
           >
             {add}

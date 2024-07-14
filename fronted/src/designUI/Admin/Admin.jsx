@@ -2,10 +2,12 @@ import AdminFooter from "./AdminFooter";
 import AdminMain from "./AdminMain";
 import AdminNavigation from "./AdminNavigation";
 function Admin() {
-  return (<div className="flex flex-col min-h screen">
+  return (
+  <div className="flex flex-col min-h screen">
     <AdminNavigation/>
     <AdminMain/>
     <AdminFooter/>
-    </div>)
+  </div>
+  );
 }
 export default Admin;

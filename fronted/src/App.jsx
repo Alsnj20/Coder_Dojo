@@ -2,10 +2,11 @@ import axios from 'axios'
 //Home
 import HomeTeacher from './components/HomeTeacher'
 import HomeStudent from './components/HomeStudent'
-import ListUsers from './components/ListUsers'
 //Register
 import RegisterUser from './components/RegisterUser'
 import LoginUser from './components/LoginUser'
+//Admin
+import AdminList from './designUI/Admin/AdminList'
 
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -21,7 +22,8 @@ function App() {
         <Route path="login/" element={<LoginUser />} />
         <Route path="admin/" element={<Admin />} />
         <Route path="teacher/" element={<HomeTeacher />} />
-        <Route path="list/" element={<ListUsers />} />
+        <Route path="admin/users/" element={<AdminList />} />
+        <Route path="admin/courses/" element={<AdminList />} />
         <Route path="student/" element={<HomeStudent />} />
         <Route path="access-denied/" element={<AccessDenied />} />
       </Routes>
