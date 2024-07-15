@@ -16,4 +16,9 @@ urlpatterns = [
   # Usuarios
   path("system/user/list/", views.UsersView.as_view(), name="user_list"),
   path("system/user/<int:pk>/", views.UserDetailView.as_view(), name="user_detail"),
+  
+  # Cursos
+  path("system/course/create/", views.CourseCreateView.as_view() ,name="course_create"),
+  
+  # Teachers
 ]

@@ -28,7 +28,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
   
 class CursoSerializer(serializers.ModelSerializer):
   docente = UsuarioSerializer(read_only=True)
-  estudiantes = UsuarioSerializer(read_only=True, many=True)
+  estudiantes = UsuarioSerializer(read_only=True, many=True, required=False)
   class Meta:
     model = Curso
     fields = ['id', 'nombre', 'descripcion', 'docente', 'estudiantes']

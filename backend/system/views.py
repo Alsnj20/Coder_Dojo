@@ -75,3 +75,20 @@ class UserDetailView(APIView):
     except Usuario.DoesNotExist:
       return Response({"error": "Usuario no encontrado."}, status=status.HTTP_404_NOT_FOUND)
   
+class CourseCreateView(generics.CreateAPIView):
+  queryset = Curso.objects.all()
+  serializer_class = CursoSerializer
+  permission_classes = [permissions.AllowAny]
+  
+  def get_serializer_context(self):
+    context = super().get_serializer_context()
+    context.update({"request": self.request})
+    return context
+  
+class TeacherListView(APIView):
+  permission_classes = [permissions.AllowAny]
+
+  def get(self, request):
+    teachers = Usuario.objects.filter(tipo='TC')
+    serializer = UsuarioSerializer(teachers, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

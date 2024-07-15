@@ -29,22 +29,6 @@ function AdminCourse() {
                 <input id="profesor" placeholder="Ingrese el nombre del profesor"
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
               </div>
-              <div className="grid gap-2">
-                <label htmlFor="estudiantes" className='block text-sm font-medium text-gray-700'>Estudiantes</label>
-                <input id="estudiantes" type="number" placeholder="Ingrese el número de estudiantes"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-              </div>
-            </div>
-            <div className="grid sm:grid-cols-1 gap-2">
-              <label htmlFor="category" className='block text-sm font-medium text-gray-700'>Categoria</label>
-              <select id="category"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <option value="" disabled>Selecciona la categoria</option>
-                <option value="web-development">Web Development</option>
-                <option value="mobile-development">Mobile Development</option>
-                <option value="data-science">Data Science</option>
-                <option value="artificial-intelligence">Artificial Intelligence</option>
-              </select>
             </div>
             <div className='flex justify-end mt-2'>
               <button
