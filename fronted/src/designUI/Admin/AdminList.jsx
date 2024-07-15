@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom';
 import Card from './Utilities/';
 function AdminList() {
   return (
     <section className="container mx-auto py-12 px-6">
       <div className="space-y-4">
+        <Link className='border-spacing-1 hover:border-b-black' to='/admin'><i><i className='bx bx-arrow-back'></i></i>Regresar </Link>
         <h2 className="text-2xl font-bold">Lista de Usuarios</h2>
         <p className="text-gray-500"></p>
         <Card>

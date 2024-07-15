@@ -31,14 +31,14 @@ function AdminMain() {
                 <button
                   className="inline-flex items-center gap-2 bg-[#0b2d5f] text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
                 >
-                  Ver Usuarios
+                  Ver Cursos
                 </button>
               </Link>
               <Link to='courses/create/'>
                 <button
                   className="inline-flex items-center gap-2 bg-[#0b2d5f] text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
                 >
-                  Crear Usuario
+                  Crear Curso
                 </button>
               </Link>
             </AdminUsersCard>

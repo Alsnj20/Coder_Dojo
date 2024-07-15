@@ -1,7 +1,9 @@
 import Card from './Utilities/';
+import { Link } from 'react-router-dom';
 function AdminCourse() {
   return (
     <section className="container mx-auto py-12 px-6">
+      <Link className='border-spacing-1 hover:border-b-black' to='/admin'><i><i className='bx bx-arrow-back'></i></i>Regresar </Link>
       <form action="">
         <div className="space-y-4">
           <div className="flex items-center justify-between">

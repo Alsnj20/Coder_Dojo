@@ -4,7 +4,7 @@ function AdminNavigation() {
   return (
     <header className="bg-[#0b2d5f] text-white py-4 px-6 flex justify-between items-center">
       <div className="flex items-center gap-4">
-        <a href="#" className="flex items-center">
+        <a href="/" className="flex items-center">
           <span className="text-2xl font-bold"> <i className="text-3xl text-white bx bx-code-alt"></i> CoderDojo</span>
         </a>
       </div>
