@@ -1,6 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Card from './Utilities/';
 function AdminList() {
+  const location = useLocation();
+  const { users } = location.state;
+  console.log('Usuarios:', users);
   return (
     <section className="container mx-auto py-12 px-6">
       <div className="space-y-4">

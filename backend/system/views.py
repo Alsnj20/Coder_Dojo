@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status 
+from rest_framework_simplejwt.tokens import RefreshToken
 
 class CreateUserView(generics.CreateAPIView):
   queryset = Usuario.objects.all()
@@ -28,15 +29,20 @@ class LoginView(APIView):
     user = authenticate(request, email=email, password=password)
     if user is not None:
       login(request, user)
-      return Response({"message": "Usuario autenticado", "user": UsuarioSerializer(user).data})
+      refresh = RefreshToken.for_user(user)
+      return Response({
+                "message": "Usuario autenticado",
+                "user": UsuarioSerializer(user).data,
+                "access_token": str(refresh.access_token),
+                "refresh_token": str(refresh),
+            })
     else:
       return Response({"message": "Usuario no autenticado"}, status=status.HTTP_401_UNAUTHORIZED)
     
 class UsersView(APIView):
-  permission_classes = [permissions.AllowAny]
+  permission_classes = [permissions.IsAdminUser]
 
   def get(self, request):
-    print("Datos: ",self, request.json())
     users = Usuario.objects.exclude(tipo='AD')
     serializer = UsuarioSerializer(users, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)

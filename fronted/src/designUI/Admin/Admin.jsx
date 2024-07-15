@@ -14,7 +14,7 @@ function Admin() {
       <AdminNavigation />
       <main className="flex-grow min-h-[80vh]">
         <Routes>
-          <Route index element={<AdminMain />} />
+          <Route index element={<AdminMain user={user}/>} />
           <Route path="users" element={<AdminList />} />
           <Route path="courses" element={<AdminList />} />
           <Route path="courses/create" element={<AdminCourse />} />
