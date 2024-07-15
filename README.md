@@ -23,7 +23,7 @@ Como estudiante, puedes interactuar con los cursos y las tareas asignadas. Tus f
 - **Unirse a Cursos**: Al unirte a un curso, serás redirigido a la página del curso donde podrás ver las tareas pendientes.
 - **Completar Tareas**: Completa tus tareas ingresando un enlace. El profesor puede responderte con un mensaje que confirme la tarea como completada o con un mensaje personalizado.
 
-## Iterfaz del Sistema
+## Interfaz del Sistema
 
 ### Página de Inicio
  **Bienvenida**: La página de inicio muestra un mensaje de bienvenida a "Coder Dojo".
