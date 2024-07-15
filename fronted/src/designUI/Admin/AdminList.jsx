@@ -1,119 +1,139 @@
+import { Link, useLocation } from 'react-router-dom';
 import Card from './Utilities/';
-function AdminList({listObj = {}, title={}, children = {}}) {
+import { useState } from 'react';
+import axios from 'axios';
+
+function AdminList() {
+  const location = useLocation();
+  const { users } = location.state;
+  const [editingUser, setEditingUser] = useState(null);
+  const [formData, setFormData] = useState({ name: '', email: '', role: '', password: '' });
+  const [showForm, setShowForm] = useState(false);
+
+  const handleEditClick = (user) => {
+    setEditingUser(user);
+    setFormData({ name: user.name, email: user.email, role: user.tipo, password: '' }); // Resetea la contraseña
+    setShowForm(true); // Muestra el formulario al editar
+  };
+
+  const handleDelete = async (userId) => {
+    try {
+      await axios.delete(`http://localhost:8000/system/user/${userId}/`);
+      // Actualiza la lista de usuarios después de eliminar
+      location.state.users = users.filter(user => user.id !== userId);
+    } catch (error) {
+      console.error('Error al eliminar el usuario:', error);
+    }
+  };
+
+  const handleSubmitEdit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(`http://localhost:8000/system/user/${editingUser.id}/`, formData);
+      const updatedUser = response.data;
+      // Actualiza la lista de usuarios
+      const updatedUsers = users.map(user => (user.id === updatedUser.id ? updatedUser : user));
+      location.state.users = updatedUsers;
+      setEditingUser(null);
+      setShowForm(false); // Oculta el formulario después de guardar
+    } catch (error) {
+      console.error('Error al editar el usuario:', error);
+    }
+  };
+
   return (
     <section className="container mx-auto py-12 px-6">
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{title}</h2>
-        <p className="text-gray-500">{children}</p>
-        <Card>
-          <div className="overflow-x-auto">
-            <table className="min-w-full bg-white">
-              <thead className="">
-                <tr className='hover:bg-gray-50'>
-                  <th className="py-3 px-4 text-left text-gray-500 font-medium">Nombre
-                  </th>
-                  <th className="py-3 px-4 text-left text-gray-500 font-medium">Correo
-                  </th>
-                  <th className="py-3 px-4 text-left text-gray-500 font-medium">Rol
-                  </th>
-                  <th className="py-3 px-4 text-left text-gray-500 font-medium">Acciones
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-gray-200 hover:bg-gray-50">
-                  <td className="py-3 px-4">
-                    Mariel Jara
-                  </td>
-                  <td className="py-3 px-4">
-                    marieljara@example.com
-                  </td>
-                  <td className="py-3 px-4">
-                    AD
-                  </td>
-                  <td>
-                    <div className="flex items-center gap-2">
-                      <button className="hover:text-blue-500">
-                        <i className="bx bx-edit"></i>
-                      </button>
-                      <button className="hover:text-red-500">
-                        <i className="bx bx-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr className="border-b border-gray-200">
-                  <td className="py-3 px-4">
-                    Mariel Jara
-                  </td>
-                  <td className="py-3 px-4">
-                    marieljara@example.com
-                  </td>
-                  <td className="py-3 px-4">
-                    AD
-                  </td>
-                  <td>
-                    <div className="flex items-center gap-2">
-                      <button className="hover:text-blue-500">
-                        <i className="bx bx-edit"></i>
-                      </button>
-                      <button className="hover:text-red-500">
-                        <i className="bx bx-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr className="border-b border-gray-200">
-                  <td className="py-3 px-4">
-                    Mariel Jara
-                  </td>
-                  <td className="py-3 px-4">
-                    marieljara@example.com
-                  </td>
-                  <td className="py-3 px-4">
-                    AD
-                  </td>
-                  <td>
-                    <div className="flex items-center gap-2">
-                      <button className="hover:text-blue-500">
-                        <i className="bx bx-edit"></i>
-                      </button>
-                      <button className="hover:text-red-500">
-                        <i className="bx bx-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                <tr className="border-b border-gray-200">
-                  <td className="py-3 px-4">
-                    Mariel Jara
-                  </td>
-                  <td className="py-3 px-4">
-                    marieljara@example.com
-                  </td>
-                  <td className="py-3 px-4">
-                    AD
-                  </td>
-                  <td>
-                    <div className="flex items-center gap-2">
-                      <button className="hover:text-blue-500">
-                        <i className="bx bx-edit"></i>
-                      </button>
-                      <button className="hover:text-red-500">
-                        <i className="bx bx-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        <Link className='border-spacing-1 hover:border-b-black' to='/admin'>
+          <i className='bx bx-arrow-back'></i> Regresar
+        </Link>
+        <h2 className="text-2xl font-bold">Lista de Usuarios</h2>
+        
+        {showForm && (
+          <div>
+            <h3 className="text-lg font-semibold">Editar Usuario</h3>
+            <form onSubmit={handleSubmitEdit} className="mb-4 grid md:grid-cols-4 gap-3">
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="Nombre"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="Correo"
+                required
+              />
+              <select
+                name="role"
+                value={formData.role}
+                onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                required
+              >
+                <option value="AD">Admin</option>
+                <option value="TC">Profesor</option>
+                <option value="ST">Estudiante</option>
+              </select>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                placeholder="Contraseña (dejar vacío si no se cambia)"
+              />
+              <div className='flex flex-col md:flex-row gap-2'>
+                <button className="bg-primary-light rounded-lg p-1 text-text-light" type="submit">Guardar</button>
+                <button className="bg-primary-light rounded-lg p-1 text-text-light" onClick={() => { setEditingUser(null); setShowForm(false); }}>Cancelar</button>
+              </div>
+            </form>
           </div>
-        </Card>
+        )}
+
+        {users.length === 0 ? (
+          <p className="text-gray-500">No hay usuarios disponibles.</p>
+        ) : (
+          <Card>
+            <div className="overflow-x-auto">
+              <table className="min-w-full bg-white">
+                <thead>
+                  <tr className='hover:bg-gray-50'>
+                    <th className="py-3 px-4 text-left text-gray-500 font-medium">Nombre</th>
+                    <th className="py-3 px-4 text-left text-gray-500 font-medium">Correo</th>
+                    <th className="py-3 px-4 text-left text-gray-500 font-medium">Rol</th>
+                    <th className="py-3 px-4 text-left text-gray-500 font-medium">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users.map(user => (
+                    <tr key={user.id} className="border-b border-gray-200 hover:bg-gray-50">
+                      <td className="py-3 px-4">{user.name}</td>
+                      <td className="py-3 px-4">{user.email}</td>
+                      <td className="py-3 px-4">{user.tipo}</td>
+                      <td>
+                        <div className="flex items-center gap-2">
+                          <button className="hover:text-blue-500" onClick={() => handleEditClick(user)}>
+                            <i className="bx bx-edit"></i>
+                          </button>
+                          <button className="hover:text-red-500" onClick={() => handleDelete(user.id)}>
+                            <i className="bx bx-trash"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+        )}
       </div>
     </section>
-  )
-
+  );
 }
+
 export default AdminList;

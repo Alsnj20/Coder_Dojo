@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-function AdminNavigation() {
+function TeacherNavigation({user}) {
   const [isDarkMode, setIsDarkMode] = useState(false);
   return (
     <header className="bg-[#0b2d5f] text-white py-4 px-6 flex justify-between items-center">
@@ -9,13 +9,13 @@ function AdminNavigation() {
         </a>
       </div>
       <nav className="hidden md:flex gap-8">
-        <a href="#" className="hover:border-b-2 border-white ">Users</a>
+        <a href="#" className="hover:border-b-2 border-white ">Tareas</a>
         <a href="#" className="hover:border-b-2 border-white ">Courses</a>
       </nav>
       <div className="flex items-center gap-4">
         <div>
         <i className={`text-gray-700 rounded-full bg-gray-300 bx bx-user p-2`}></i>
-          <span> Bienvenido, Admin</span>
+          <span> Bienvenido, {user.name}</span>
         </div>
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
@@ -35,4 +35,4 @@ function AdminNavigation() {
     </header>
   );
 }
-export default AdminNavigation;
+export default TeacherNavigation;

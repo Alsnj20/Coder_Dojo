@@ -14,30 +14,39 @@ const LoginUser = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const login = async (email, password) => {
     try {
-      const response = await axios.post('http://localhost:8000/system/user/login/', formData);
-      const userA = response.data.user;
-      const userT = userA.tipo;
+      const response = await axios.post('http://localhost:8000/system/user/login/', { email, password });
+      const access = response.data.access_token;
+      const refresh = response.data.refresh_token;
+      const user = response.data.user;
+      const userT = user.tipo;
       setUserType(userT);
+      localStorage.setItem('access_token', access);
+      localStorage.setItem('refresh_token', refresh);
 
       if (userT === 'ST') {
-        navigate('/student', { state: userA });
+        navigate('/student', { state: user });
       } else if (userT === 'TC') {
-        navigate('/teacher', { state: userA });
+        navigate('/teacher', { state: user });
       } else if (userT === 'AD') {
-        console.log('Admin', userA)
-        navigate('/admin', { state: userA })
+        console.log('Admin', user);
+        navigate('/admin', { state: user });
       } else {
         setUserType(null);
-        navigate('/')
+        navigate('/');
       }
 
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
       setUserType(null);
     }
+  };
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { email, password } = formData;
+    login(email, password);
   };
 
   return (
