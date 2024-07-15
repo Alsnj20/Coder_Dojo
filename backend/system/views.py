@@ -43,6 +43,7 @@ class UsersView(APIView):
   permission_classes = [permissions.IsAdminUser]
 
   def get(self, request):
+    print(request.user)
     users = Usuario.objects.exclude(tipo='AD')
     serializer = UsuarioSerializer(users, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
@@ -50,20 +51,27 @@ class UsersView(APIView):
 class UserDetailView(APIView):
   permission_classes = [permissions.AllowAny]
 
-  def get(self, request, pk):
-    user = Usuario.objects.get(pk=pk)
-    serializer = UsuarioSerializer(user)
-    return Response(serializer.data, status=status.HTTP_200_OK)
-  
   def put(self, request, pk):
-    user = Usuario.objects.get(pk=pk)
-    serializer = UsuarioSerializer(user, data=request.data)
-    if serializer.is_valid():
-      serializer.save()
-      return Response(serializer.data, status=status.HTTP_200_OK)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-  
+    print(request.data)
+    try:
+      user = Usuario.objects.get(pk=pk)
+      print(user)
+      serializer = UsuarioSerializer(user, data=request.data, partial=True)
+      if serializer.is_valid():
+        if 'password' in request.data and request.data['password']:
+          user.set_password(request.data['password'])
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+      print(serializer.errors)
+      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Usuario.DoesNotExist:
+      return Response({"error": "Usuario no encontrado."}, status=status.HTTP_404_NOT_FOUND)
+
   def delete(self, request, pk):
-    user = Usuario.objects.get(pk=pk)
-    user.delete()
-    return Response(status=status.HTTP_204_NO_CONTENT)
+    try:
+      user = Usuario.objects.get(pk=pk)
+      user.delete()
+      return Response(status=status.HTTP_204_NO_CONTENT)
+    except Usuario.DoesNotExist:
+      return Response({"error": "Usuario no encontrado."}, status=status.HTTP_404_NOT_FOUND)
+  

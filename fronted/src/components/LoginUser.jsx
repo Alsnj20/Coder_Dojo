@@ -24,7 +24,6 @@ const LoginUser = () => {
       setUserType(userT);
       localStorage.setItem('access_token', access);
       localStorage.setItem('refresh_token', refresh);
-      console.log('Token:', access, refresh);
 
       if (userT === 'ST') {
         navigate('/student', { state: user });

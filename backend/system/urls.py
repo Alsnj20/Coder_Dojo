@@ -15,4 +15,5 @@ urlpatterns = [
 
   # Usuarios
   path("system/user/list/", views.UsersView.as_view(), name="user_list"),
+  path("system/user/<int:pk>/", views.UserDetailView.as_view(), name="user_detail"),
 ]

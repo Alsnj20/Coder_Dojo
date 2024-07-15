@@ -5,7 +5,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
   class Meta:
     model = Usuario
     fields = ['id', 'name', 'email', 'password', 'tipo',]
-    extra_kwargs = {'password': {'write_only': True}}
+    extra_kwargs = {'password': {'write_only': True, 'required': False}}
 
   def create(self, validated_data):
     user = Usuario.objects.create_user(
@@ -16,6 +16,15 @@ class UsuarioSerializer(serializers.ModelSerializer):
     user.tipo = validated_data['tipo']
     user.save()
     return user
+  
+  def update(self, instance, validated_data):
+    instance.name = validated_data.get('name', instance.name)
+    instance.email = validated_data.get('email', instance.email)
+    instance.tipo = validated_data.get('tipo', instance.tipo)
+    if 'password' in validated_data and validated_data['password']:
+      instance.set_password(validated_data['password'])
+    instance.save()
+    return instance
   
 class CursoSerializer(serializers.ModelSerializer):
   docente = UsuarioSerializer(read_only=True)
