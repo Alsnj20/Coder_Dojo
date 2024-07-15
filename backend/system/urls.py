@@ -20,8 +20,9 @@ urlpatterns = [
   # Cursos
   path("system/course/create/", views.CourseCreateView.as_view() ,name="course_create"),
   path("system/course/list/", views.CourseListView.as_view(), name="course_list"),
+  path("system/course/<int:pk>/", views.CourseDetailView.as_view(), name="course_detail"),
   
   # Teachers
   path("system/teacher/list/", views.TeacherListView.as_view(), name="teacher_list"),
-  path("system/course/<int:pk>/", views.CoursesByTeacherView.as_view(), name="teacher_course"),
+  path("system/teacher/course/<int:pk>/", views.CoursesByTeacherView.as_view(), name="teacher_course"),
 ]

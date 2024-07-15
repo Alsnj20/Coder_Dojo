@@ -2,21 +2,20 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import TeacherCoursesCard from "./TeacherCoursesCard";
-function AdminMain({ user }) {
+function  TeacherMain({ user }) {
   const [cursos, setCursos] = useState([])
 
   useEffect(() => {
-    console.log(user.id)
-    const getCursos = async (userId) => {
+    const getCursos = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/system/course/${userId}/`)
+        const response = await axios.get(`http://localhost:8000/system/teacher/course/${user.id}/`)
         console.log(response.data)
         setCursos(response.data)
       } catch (error) {
         console.error('Error al obtener los cursos:', error)
       }
     }
-    getCursos(user.id)
+    getCursos()
   }, [user.id])
 
 
@@ -34,11 +33,10 @@ function AdminMain({ user }) {
                 <h2 className="text-2xl font-bold col-span-full">Cursos</h2>
                 <div className="grid gap-3">
                   {cursos.map((curso) => (
-                    <TeacherCoursesCard
+                    <TeacherCoursesCard 
                       key={curso.id}
-                      nombre={curso.nombre}
-                      descripcion={curso.descripcion}
-                      profesor={user.name}
+                      user={user} 
+                      course={curso}
                     />
                   ))}
                 </div>
@@ -50,4 +48,4 @@ function AdminMain({ user }) {
     </main>
   )
 }
-export default AdminMain;
+export default  TeacherMain;
