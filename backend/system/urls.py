@@ -19,6 +19,7 @@ urlpatterns = [
   
   # Cursos
   path("system/course/create/", views.CourseCreateView.as_view() ,name="course_create"),
+  path("system/course/list/", views.CourseListView.as_view(), name="course_list"),
   
   # Teachers
   path("system/teacher/list/", views.TeacherListView.as_view(), name="teacher_list"),

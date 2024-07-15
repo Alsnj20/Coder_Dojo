@@ -85,6 +85,22 @@ class CourseCreateView(generics.CreateAPIView):
     context.update({"request": self.request})
     return context
   
+class CourseListView(APIView):
+  permission_classes = [permissions.AllowAny]
+
+  def get(self, request):
+    courses = Curso.objects.all()
+    serializer = CursoSerializer(courses, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+  
+class CoursesByTeacherView(APIView):
+  permission_classes = [permissions.AllowAny]
+
+  def get(self, request, pk):
+    courses = Curso.objects.filter(docente=pk)
+    serializer = CursoSerializer(courses, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+  
 class TeacherListView(APIView):
   permission_classes = [permissions.AllowAny]
 
