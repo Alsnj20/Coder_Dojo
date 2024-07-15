@@ -27,11 +27,18 @@ class UsuarioSerializer(serializers.ModelSerializer):
     return instance
   
 class CursoSerializer(serializers.ModelSerializer):
-  docente = UsuarioSerializer(read_only=True)
+  docente = serializers.PrimaryKeyRelatedField(queryset=Usuario.objects.filter(tipo=Usuario.Types.TEACHER))
   estudiantes = UsuarioSerializer(read_only=True, many=True, required=False)
   class Meta:
     model = Curso
     fields = ['id', 'nombre', 'descripcion', 'docente', 'estudiantes']
+  
+  def validate(self, data):
+    nombre = data.get('nombre')
+    docente = data.get('docente')
+    if Curso.objects.filter(nombre=nombre, docente=docente).exists():
+      raise serializers.ValidationError("El curso ya existe")
+    return data
 
 class TareaSerializer(serializers.ModelSerializer):
   curso = CursoSerializer(read_only=True)
