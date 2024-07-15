@@ -44,7 +44,7 @@ class Usuario(AbstractUser):
   USERNAME_FIELD = 'email'
 
   def __str__(self):
-    return "{Name: "+ self.username+",Email: "+self.email+"Password: "+self.password+",Type: "+self.tipo+"}"
+    return "{Name: "+ self.name+",Email: "+self.email+"Password: "+self.password+",Type: "+self.tipo+"}"
   
 class Curso(models.Model):
   nombre = models.CharField(max_length=50)
