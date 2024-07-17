@@ -138,3 +138,13 @@ class TeacherListView(APIView):
     teachers = Usuario.objects.filter(tipo='TC')
     serializer = UsuarioSerializer(teachers, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+  
+class TaskCreateView(generics.CreateAPIView):
+  queryset = Tarea.objects.all()
+  serializer_class = TareaSerializer
+  permission_classes = [permissions.AllowAny]
+  
+  def get_serializer_context(self):
+    context = super().get_serializer_context()
+    context.update({"request": self.request})
+    return context
