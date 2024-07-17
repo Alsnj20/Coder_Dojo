@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-function TeacherNavigation({user}) {
+function TeacherNavigation({user = {}}) {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  if(!user){
+    return <h1>Loading...</h1>
+  }
   return (
     <header className="bg-[#0b2d5f] text-white py-4 px-6 flex justify-between items-center">
       <div className="flex items-center gap-4">

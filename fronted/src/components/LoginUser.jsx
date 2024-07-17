@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
-const LoginUser = () => {
+function LoginUser(){
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
@@ -96,6 +96,6 @@ const LoginUser = () => {
       </div>
     </div>
   );
-};
+}
 
 export default LoginUser;
