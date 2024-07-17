@@ -92,6 +92,36 @@ class CourseListView(APIView):
     courses = Curso.objects.all()
     serializer = CursoSerializer(courses, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+class CourseDetailView(APIView):
+  permission_classes = [permissions.AllowAny]
+
+  def get(self, request, pk):
+    try:
+      course = Curso.objects.get(pk=pk)
+      serializer = CursoSerializer(course)
+      return Response(serializer.data, status=status.HTTP_200_OK)
+    except Curso.DoesNotExist:
+      return Response({"error": "Curso no encontrado."}, status=status.HTTP_404_NOT_FOUND)
+  
+  def put(self, request, pk):
+    try:
+      course = Curso.objects.get(pk=pk)
+      serializer = CursoSerializer(course, data=request.data, partial=True)
+      if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+      return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Curso.DoesNotExist:
+      return Response({"error": "Curso no encontrado."}, status=status.HTTP_404_NOT_FOUND)
+  
+  def delete(self, request, pk):
+    try:
+      course = Curso.objects.get(pk=pk)
+      course.delete()
+      return Response(status=status.HTTP_204_NO_CONTENT)
+    except Curso.DoesNotExist:
+      return Response({"error": "Curso no encontrado."}, status=status.HTTP_404_NOT_FOUND)
   
 class CoursesByTeacherView(APIView):
   permission_classes = [permissions.AllowAny]
@@ -108,3 +138,13 @@ class TeacherListView(APIView):
     teachers = Usuario.objects.filter(tipo='TC')
     serializer = UsuarioSerializer(teachers, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+  
+class TaskCreateView(generics.CreateAPIView):
+  queryset = Tarea.objects.all()
+  serializer_class = TareaSerializer
+  permission_classes = [permissions.AllowAny]
+  
+  def get_serializer_context(self):
+    context = super().get_serializer_context()
+    context.update({"request": self.request})
+    return context

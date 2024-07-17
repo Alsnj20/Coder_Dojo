@@ -8,18 +8,29 @@ import LoginUser from './components/LoginUser'
 import Admin from './designUI/Admin/Admin'
 import AccessDenied from './components/AccessDenied'
 import Teacher from './designUI/Teacher/Teacher'
+import { UserProvider } from './components/useContext'
+import PrivateRoute from './components/PrivateRoute'
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="register/" element={<RegisterUser />} />
-        <Route path="login/" element={<LoginUser />} />
-        <Route path="admin/*" element={<Admin />}/>
-        <Route path="teacher/" element={<Teacher />} />
-        <Route path="access-denied/" element={<AccessDenied />} />
-      </Routes>
-    </Router>
+    <UserProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="register/" element={<RegisterUser />} />
+          <Route path="login/" element={<LoginUser />} />
+          <Route path="access-denied/" element={<AccessDenied />} />
+
+          <Route element={<PrivateRoute allowedRoles={['AD']} />}>
+            <Route path="admin/*" element={<Admin />} />
+          </Route>
+
+          <Route element={<PrivateRoute allowedRoles={['TC']} />}>
+            <Route path="teacher/*" element={<Teacher />} />
+          </Route>
+          
+        </Routes>
+      </Router>
+    </UserProvider>
   )
 }
 

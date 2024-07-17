@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useUser } from "../../components/useContext";
 function AdminNavigation() {
+  const { user, logout } = useUser();
   const [isDarkMode, setIsDarkMode] = useState(false);
   return (
     <header className="bg-[#0b2d5f] text-white py-4 px-6 flex justify-between items-center">
@@ -24,13 +26,12 @@ function AdminNavigation() {
           <i className={`w-8  h-8 text-2xl rounded-full hover:bg-white hover:text-[#0b2d5f] ${isDarkMode ? "bx bx-sun" : "bx bx-moon"}`}></i>
           <span className="sr-only">Toggle dark mode</span>
         </button>
-        <a
-          href="/"
+        <button onClick={logout}
           className="bg-white h-8 text-[#0b2d5f] px-4 py-2 rounded-md hover:bg-[#e6e6e6] flex items-center gap-2"
         >
           <i className="text-lg bx bx-log-out" style={{ color: '#0b2d5f' }}></i>
           Logout
-        </a>
+        </button>
       </div>
     </header>
   );
