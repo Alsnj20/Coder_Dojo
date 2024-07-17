@@ -10,6 +10,7 @@ import AccessDenied from './components/AccessDenied'
 import Teacher from './designUI/Teacher/Teacher'
 import { UserProvider } from './components/useContext'
 import PrivateRoute from './components/PrivateRoute'
+import Student from './designUI/Student/Student'
 function App() {
   return (
     <UserProvider>
@@ -27,7 +28,11 @@ function App() {
           <Route element={<PrivateRoute allowedRoles={['TC']} />}>
             <Route path="teacher/*" element={<Teacher />} />
           </Route>
-          
+
+          <Route element={<PrivateRoute allowedRoles={['ST']} />}>
+            <Route path="student/*" element={<Student/>} />
+          </Route>
+    
         </Routes>
       </Router>
     </UserProvider>

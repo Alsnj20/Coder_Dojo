@@ -40,7 +40,7 @@ class LoginView(APIView):
       return Response({"message": "Usuario no autenticado"}, status=status.HTTP_401_UNAUTHORIZED)
     
 class UsersView(APIView):
-  permission_classes = [permissions.IsAdminUser]
+  permission_classes = [permissions.AllowAny]
 
   def get(self, request):
     print(request.user)

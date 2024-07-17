@@ -55,6 +55,7 @@ function StudentMain() {
               <h1>Mis Cursos</h1>
           </div>
         </div>
+        </div>
       </section>
     </main>
   )
