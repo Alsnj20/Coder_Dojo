@@ -7,10 +7,12 @@ function PrivateRoute({ allowedRoles }) {
   console.log("PrivateRoute", user);
 
   if (!user) {
-    return <Navigate to="/login" />;
+    console.log("Login required");
+    return <Navigate to="/" />;
   }
 
   if(allowedRoles && !allowedRoles.includes(user.tipo)){
+    console.log("User not allowed");
     return <Navigate to="/access-denied" />;
   }
 

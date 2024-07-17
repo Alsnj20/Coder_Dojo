@@ -2,24 +2,18 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../components/useContext";
 
-function TeacherNavigation({user = {}}) {
+function TeacherNavigation() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const { clearUser } = useUser();
-  const navigate = useNavigate();
+  const { user, logout } = useUser();
 
   const handleLogout = () => {
-    clearUser();
-    navigate("/");
-  }
-
-  if(!user){
-    return <h1>Loading...</h1>
+    logout();
   }
 
   return (
     <header className="bg-[#0b2d5f] text-white py-4 px-6 flex justify-between items-center">
       <div className="flex items-center gap-4">
-        <Link to="/" 
+        <Link to="/" onClick={handleLogout}
           className="flex items-center">
           <span className="text-2xl font-bold"> <i className="text-3xl text-white bx bx-code-alt"></i> CoderDojo</span>
         </Link>

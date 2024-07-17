@@ -2,8 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Card from "../Admin/Utilities";
 
 function TeacherCoursesCard({ course = {}, user = {} }) {
-  console.log("Course "+ JSON.stringify(course));
-  console.log("User "+user);
   return (
     <Card>
       <div className="flex flex-col justify-between">
