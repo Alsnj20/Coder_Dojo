@@ -16,7 +16,7 @@ function App() {
         <Route path="register/" element={<RegisterUser />} />
         <Route path="login/" element={<LoginUser />} />
         <Route path="admin/*" element={<Admin />}/>
-        <Route path="teacher/" element={<Teacher />} />
+        <Route path="teacher/*" element={<Teacher />} />
         <Route path="access-denied/" element={<AccessDenied />} />
       </Routes>
     </Router>

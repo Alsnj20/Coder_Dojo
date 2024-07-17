@@ -9,14 +9,14 @@ function  TeacherMain({ user }) {
     const getCursos = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/system/teacher/course/${user.id}/`)
-        console.log(response.data)
         setCursos(response.data)
+        console.log('Cursos:', response.data)
       } catch (error) {
         console.error('Error al obtener los cursos:', error)
       }
     }
     getCursos()
-  }, [user.id])
+  }, [user.id], cursos)
 
 
   return (
@@ -35,7 +35,7 @@ function  TeacherMain({ user }) {
                   {cursos.map((curso) => (
                     <TeacherCoursesCard 
                       key={curso.id}
-                      user={user} 
+                      user={user}
                       course={curso}
                     />
                   ))}
