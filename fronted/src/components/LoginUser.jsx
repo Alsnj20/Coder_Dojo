@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import { useUser } from './useContext';
 
 function LoginUser(){
   const navigate = useNavigate();
+  const { login } = useUser();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -14,7 +16,9 @@ function LoginUser(){
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const login = async (email, password) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { email, password } = formData;
     try {
       const response = await axios.post('http://localhost:8000/system/user/login/', { email, password });
       const access = response.data.access_token;
@@ -22,8 +26,8 @@ function LoginUser(){
       const user = response.data.user;
       const userT = user.tipo;
       setUserType(userT);
-      localStorage.setItem('access_token', access);
-      localStorage.setItem('refresh_token', refresh);
+
+      login(user, {access: access, refresh: refresh});
 
       if (userT === 'ST') {
         navigate('/student', { state: user });
@@ -41,13 +45,7 @@ function LoginUser(){
       console.error('Error al iniciar sesión:', error);
       setUserType(null);
     }
-  };
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const { email, password } = formData;
-    login(email, password);
-  };
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-secondary-light dark:bg-secondary-dark">

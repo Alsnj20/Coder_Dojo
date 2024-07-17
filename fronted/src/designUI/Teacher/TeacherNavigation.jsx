@@ -1,15 +1,28 @@
 import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useUser } from "../../components/useContext";
+
 function TeacherNavigation({user = {}}) {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const { clearUser } = useUser();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    clearUser();
+    navigate("/");
+  }
+
   if(!user){
     return <h1>Loading...</h1>
   }
+
   return (
     <header className="bg-[#0b2d5f] text-white py-4 px-6 flex justify-between items-center">
       <div className="flex items-center gap-4">
-        <a href="/" className="flex items-center">
+        <Link to="/" 
+          className="flex items-center">
           <span className="text-2xl font-bold"> <i className="text-3xl text-white bx bx-code-alt"></i> CoderDojo</span>
-        </a>
+        </Link>
       </div>
       <nav className="hidden md:flex gap-8">
         <a href="#" className="hover:border-b-2 border-white ">Tareas</a>
@@ -27,13 +40,13 @@ function TeacherNavigation({user = {}}) {
           <i className={`w-8  h-8 text-2xl rounded-full hover:bg-white hover:text-[#0b2d5f] ${isDarkMode ? "bx bx-sun" : "bx bx-moon"}`}></i>
           <span className="sr-only">Toggle dark mode</span>
         </button>
-        <a
-          href="/"
+        <button
+          onClick={handleLogout}
           className="bg-white h-8 text-[#0b2d5f] px-4 py-2 rounded-md hover:bg-[#e6e6e6] flex items-center gap-2"
         >
           <i className="text-lg bx bx-log-out" style={{ color: '#0b2d5f' }}></i>
           Logout
-        </a>
+        </button>
       </div>
     </header>
   );
