@@ -16,13 +16,14 @@ function StudentMain() {
       }
     }
     getCursos()
-  }, [user.id], cursos)
+  }, [user.id])
 
 
-  const joinCourse = async (courseId) => {
+  const enrollCourse = async (courseId) => {
+    console.log('Enroll course:', courseId)
     try {
-      const response = await axios.post(`http://localhost:8000/system/student/join/${user.id}/${courseId}/`)
-      console.log(response.data)
+      const response = await axios.post(`http://localhost:8000/system/student/enroll/${courseId}/${user.id}/`)
+      console.log("Cambios "+response.data)
     } catch (error) {
       console.error('Error al unirse al curso:', error)
     }
@@ -44,7 +45,9 @@ function StudentMain() {
                     <p className="text-sm text-muted-foreground dark:text-muted-foreground">Profesor: {curso.id}</p>
                     <p className="font-medium">{curso.descripcion}</p>
                     <div className="flex justify-end">
-                      <button className="bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark py-2 px-4 rounded-md hover:bg-blue-900 mt-2">
+                      <button 
+                      onClick={() => enrollCourse(curso.id)}
+                      className="bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark py-2 px-4 rounded-md hover:bg-blue-900 mt-2">
                         <i className="bx bx-edit mr-1"></i>
                         Unirse
                       </button>

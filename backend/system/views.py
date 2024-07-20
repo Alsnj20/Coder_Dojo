@@ -153,13 +153,14 @@ class TaskCreateView(generics.CreateAPIView):
 class CoursesOfAStudentView(APIView):
   permission_classes = [permissions.AllowAny]  
   
-  def get(self, request, pkC, pkE):
+  def post(self, request, pkC, pkE):
     try:
       course = Curso.objects.get(id=pkC)
+      print(course)
       student = Usuario.objects.get(id=pkE, tipo='ST')
+      print(student)
       course.estudiantes.add(student)
       course.save()
-      serializer = CursoSerializer(course)
       return Response({"message": "Estudiante inscrito con el éxito"}, status=status.HTTP_200_OK)
     except Curso.DoesNotExist:
       return Response({"error": "Curso no encontrado."}, status=status.HTTP_404_NOT_FOUND)
