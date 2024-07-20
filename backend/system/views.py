@@ -85,6 +85,7 @@ class CourseCreateView(generics.CreateAPIView):
     context.update({"request": self.request})
     return context
   
+  
 class CourseListView(APIView):
   permission_classes = [permissions.AllowAny]
 
@@ -148,3 +149,20 @@ class TaskCreateView(generics.CreateAPIView):
     context = super().get_serializer_context()
     context.update({"request": self.request})
     return context
+  
+class CoursesOfAStudentView(APIView):
+  permission_classes = [permissions.AllowAny]  
+  
+  def get(self, request, pkC, pkE):
+    try:
+      course = Curso.objects.get(id=pkC)
+      student = Usuario.objects.get(id=pkE, tipo='ST')
+      course.estudiantes.add(student)
+      course.save()
+      serializer = CursoSerializer(course)
+      return Response({"message": "Estudiante inscrito con el éxito"}, status=status.HTTP_200_OK)
+    except Curso.DoesNotExist:
+      return Response({"error": "Curso no encontrado."}, status=status.HTTP_404_NOT_FOUND)
+    except Usuario.DoesNotExist:
+      return Response({"error": "Estudiante no encontrado."}, status=status.HTTP_404_NOT_FOUND)
+    
