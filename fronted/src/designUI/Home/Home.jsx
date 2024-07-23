@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
 import HomeNavigation from './HomeNavigation';
 import HomeMain from './HomeMain';
 import HomeFooter from './HomeFooter';
-import AccessDenied from "../../components/AccessDenied";
+import HomeRol from "./HomeRol";
+import HomeAboutUs from "./HomeAboutUs";
 function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -16,9 +16,11 @@ function Home() {
   }, [isDarkMode]);
 
   return (
-    <div>
+    <div className="w-screen">
       <HomeNavigation isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       <HomeMain />
+      <HomeRol/>
+      <HomeAboutUs />
       <HomeFooter />
 
     </div>
