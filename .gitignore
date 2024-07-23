@@ -1,5 +1,6 @@
 # Virtual Environment
 venv/
+backend/db.sqlite3
 
 # Archivos de Python
 *.pyc
