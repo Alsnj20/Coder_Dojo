@@ -40,7 +40,7 @@ class LoginView(APIView):
       return Response({"message": "Usuario no autenticado"}, status=status.HTTP_401_UNAUTHORIZED)
     
 class UsersView(APIView):
-  permission_classes = [permissions.IsAdminUser]
+  permission_classes = [permissions.AllowAny]
 
   def get(self, request):
     print(request.user)
@@ -84,6 +84,7 @@ class CourseCreateView(generics.CreateAPIView):
     context = super().get_serializer_context()
     context.update({"request": self.request})
     return context
+  
   
 class CourseListView(APIView):
   permission_classes = [permissions.AllowAny]
@@ -148,3 +149,21 @@ class TaskCreateView(generics.CreateAPIView):
     context = super().get_serializer_context()
     context.update({"request": self.request})
     return context
+  
+class CoursesOfAStudentView(APIView):
+  permission_classes = [permissions.AllowAny]  
+  
+  def post(self, request, pkC, pkE):
+    try:
+      course = Curso.objects.get(id=pkC)
+      print(course)
+      student = Usuario.objects.get(id=pkE, tipo='ST')
+      print(student)
+      course.estudiantes.add(student)
+      course.save()
+      return Response({"message": "Estudiante inscrito con el éxito"}, status=status.HTTP_200_OK)
+    except Curso.DoesNotExist:
+      return Response({"error": "Curso no encontrado."}, status=status.HTTP_404_NOT_FOUND)
+    except Usuario.DoesNotExist:
+      return Response({"error": "Estudiante no encontrado."}, status=status.HTTP_404_NOT_FOUND)
+    

@@ -2,9 +2,9 @@ import AdminFooter from "./AdminFooter";
 import AdminMain from "./AdminMain";
 import AdminList from "./AdminList";
 import AdminNavigation from "./AdminNavigation";
-import AccessDenied from "../../components/AccessDenied";
 import { useLocation, Outlet, Route, Routes } from 'react-router-dom';
 import AdminCourse from "./AdminCourse";
+import AdminCourseCard from "./AdminCourseCard";
 
 function Admin() {
   const location = useLocation();
@@ -14,9 +14,9 @@ function Admin() {
       <AdminNavigation />
       <main className="flex-grow min-h-[80vh]">
         <Routes>
-          <Route index element={<AdminMain user={user}/>} />
+          <Route index element={<AdminMain/>} />
           <Route path="users" element={<AdminList />} />
-          <Route path="courses" element={<AdminList />} />
+          <Route path="courses" element={<AdminCourseCard />} />
           <Route path="courses/create" element={<AdminCourse />} />
         </Routes>
       </main>
