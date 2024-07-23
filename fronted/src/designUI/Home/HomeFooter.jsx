@@ -3,24 +3,25 @@ import Image from './img/logo.png';
 function HomeFooter() {
   return (
     <footer className="relative text-text-light
-    mt-20
   bg-primary-light md:bg-transparent
    dark:text-text-dark py-8 px-6 md:px-12 lg:px-24 min-h-[200px]">
       <div className="relative z-10 container max-w-7xl mx-auto
       md:mt-[5%]
       flex flex-col md:flex-row justify-between items-center gap-8">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4
+        dark:text-text-light
+        ">
           <img src={Image} alt="Logo" height="100" width="100" />
           <span className="text-2xl font-bold">
-            <i className="text-3xl text-text-light dark:text-text-dark bx bx-code-alt"></i> Coder Dojo
+            <i className="text-3xl text-text-light bx bx-code-alt"></i> Coder Dojo
           </span>
         </div>
-        <nav className="flex flex-col md:flex-row gap-4 font-bold">
-          <a href="#" className="hover:border-b-2 border-text-light dark:border-text-dark">Home</a>
-          <a href="#" className="hover:border-b-2 border-text-light dark:border-text-dark">Cursos</a>
-          <a href="#" className="hover:border-b-2 border-text-light dark:border-text-dark">Tareas</a>
+        <nav className="flex flex-col md:flex-row gap-4 font-bold dark:text-text-light">
+          <a href="#" className="hover:border-b-2 border-text-light">Home</a>
+          <a href="#" className="hover:border-b-2 border-text-light ">Cursos</a>
+          <a href="#" className="hover:border-b-2 border-text-light">Tareas</a>
         </nav>
-        <div className="flex flex-col items-center md:items-start gap-4 font-bold" >
+        <div className="flex flex-col items-center md:items-start gap-4 font-bold dark:text-text-light">
           <p>Redes Sociales</p>
           <div className="flex gap-4">
             <a href="#" className="text-2xl"><i className="bx bxl-linkedin-square"></i></a>

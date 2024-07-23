@@ -16,7 +16,9 @@ function Home() {
   }, [isDarkMode]);
 
   return (
-    <div className="w-screen">
+    <div className="w-screen
+    dark:bg-[#2c2c2c]
+    ">
       <HomeNavigation isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       <HomeMain />
       <HomeRol/>

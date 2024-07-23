@@ -47,7 +47,7 @@ function HomeMain() {
           </div>
         </div>
       </section>
-      <div className='absolute bottom-0 flex w-full gap-4 md:gap-40 '>
+      <div className='absolute -bottom-4 flex w-screen gap-4 md:gap-40 '>
         <svg className='w-full h-auto' viewBox="0 0 356 152" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M87.6551 1L1 16.9696V151H354L286.483 80.2776L161.02 71.7224L87.6551 1Z" fill="#0B2D5F" stroke="#0B2D5F" />
         </svg>
