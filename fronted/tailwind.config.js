@@ -8,6 +8,11 @@ export default {
         sans: ['Inter var', 'ui-sans-serif', 'system-ui'],
       },
       colors: {
+        bgHome: {
+          light: 'bg-gradient-to-r from-[#7FD7FD] to-[#C2EFF9]',
+          dark: '#1f2937',
+          optional: 'bg-gradient-to-r from-blue-200 to-cyan-200',
+        },
         primary: {
           light: '#0b2d5f', 
           dark: '#0a224d',
@@ -19,7 +24,8 @@ export default {
         accent: '#ffcc00',
         text: {
           light: '#ffffff',
-          dark: '#d1d5db', 
+          dark: '#000000',
+          optional: '#0b2d5f', 
         },
         muted: {
           foreground: '#6c757d',
