@@ -16,11 +16,11 @@ function Home() {
   }, [isDarkMode]);
 
   return (
-    <div className="bg-gray-100
-    dark:bg-gradient-to-r dark:from-[#1F2937] dark:to-[#1D2735]">
+    <div>
       <HomeNavigation isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       <HomeMain />
       <HomeFooter />
+
     </div>
   );
 }
