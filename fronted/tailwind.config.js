@@ -29,11 +29,27 @@ export default {
           light: '#ffffff',
           dark: '#d1d5db',
         },
+        menu: {
+          light: '#d9d9d9',
+          dark: '#455064'
+        }
       },
-      backgroundColor: {
-        'light': 'bg-gradient-to-r from-[#7FD7FD] to-[#C2EFF9]',
-        'dark': '#1f2937',
-        'optional': 'bg-gradient-to-r from-blue-200 to-cyan-200',
+      backgroundImage: {
+        'bgHome': 'linear-gradient(to bottom, #7fd7fd, #8cdcfc, #98e0fa, #a5e5fa, #b1e9f9, #beecfc, #caeffe, #d6f2ff, #e4f4ff, #f0f7ff, #f9faff, #ffffff)'
+      },
+      animation:{
+        'move-cloud': 'moveCloud 20s linear infinite',
+        'open-menu': 'openMenu 0.5s ease-in-out'
+      },
+      keyframes: {
+        moveCloud: {
+          '0%': { transform: 'translateX(-2%)' },
+          '100%': { transform: 'translateX(60%)' },
+        },
+        openMenu: {
+          '0%': { marginRight: '-10%' },
+          '100%': { marginRight: '0' },
+        }
       },
     }
   },
