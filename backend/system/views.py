@@ -189,8 +189,19 @@ class AssignTaskView(APIView):
             return Response({"status": "Tasks assigned successfully"}, status=status.HTTP_200_OK)
         except (Tarea.DoesNotExist, Curso.DoesNotExist):
             return Response({"error": "Task or course not found"}, status=status.HTTP_404_NOT_FOUND)
+          
+          
+class StudentAssignmentsView(generics.ListAPIView):
+  serializer_class = EntregaSerializer
+  permission_classes = [permissions.IsAuthenticated]
+
+  def get_queryset(self):
+        user = self.request.user
+        return Entrega.objects.filter(estudiante=user)
+  
+
 class CoursesOfAStudentView(APIView):
-  permission_classes = [permissions.AllowAny]  
+  permission_classes = [permissions.AllowAny] 
   
   def post(self, request, pkC, pkE):
     print(pkC, pkE)
@@ -206,4 +217,31 @@ class CoursesOfAStudentView(APIView):
       return Response({"error": "Curso no encontrado."}, status=status.HTTP_404_NOT_FOUND)
     except Usuario.DoesNotExist:
       return Response({"error": "Estudiante no encontrado."}, status=status.HTTP_404_NOT_FOUND)
+    
+    
+# Student courses
+class StudentMyCourses(APIView):
+  permission_classes = [permissions.AllowAny]
+
+  def get(self, request, pk):
+    try:
+      student = Usuario.objects.get(id=pk, tipo='ST')
+      courses = student.cursos.all()
+      serializer = CursoSerializer(courses, many=True)
+      return Response(serializer.data, status=status.HTTP_200_OK)
+    except Usuario.DoesNotExist:
+      return Response({"error": "Estudiante no encontrado."}, status=status.HTTP_404_NOT_FOUND)
+    
+class AssignedTasksView(generics.ListAPIView):
+    serializer_class = TareaSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self):
+        student_id = self.kwargs.get('student_id')
+        try:
+            user = Usuario.objects.get(id=student_id, tipo=Usuario.Types.STUDENT)
+            cursos_ids = user.cursos.values_list('id', flat=True)
+            return Tarea.objects.filter(curso__id__in=cursos_ids)
+        except Usuario.DoesNotExist:
+            return Tarea.objects.none()
     

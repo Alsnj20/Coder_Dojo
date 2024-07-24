@@ -23,7 +23,11 @@ urlpatterns = [
   path("system/course/<int:pk>/", views.CourseDetailView.as_view(), name="course_detail"),
   
   # Inscripción a cursos
+  
+  # Estudiantes
   path("system/student/enroll/<int:pkC>/<int:pkE>/", views.CoursesOfAStudentView.as_view(), name="enroll-student"),
+  path("system/student/<int:pk>/courses/", views.StudentMyCourses.as_view(), name="student_mycourses"),
+  path("system/student/<int:student_id>/assigned_tasks/", views.AssignedTasksView.as_view(), name="assigned_tasks"),
   
   # Teachers
   path("system/teacher/list/", views.TeacherListView.as_view(), name="teacher_list"),

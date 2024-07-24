@@ -29,6 +29,7 @@ export default {
         card: {
           light: '#ffffff',
           dark: '#d1d5db',
+          opt: '#dee9f8'
         },
         menu: {
           light: '#d9d9d9',
