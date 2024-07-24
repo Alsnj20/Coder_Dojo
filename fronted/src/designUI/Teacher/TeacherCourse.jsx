@@ -23,6 +23,17 @@ function TeacherCourse() {
     getTasks();
   }, [course.id]);
 
+
+  const handleAssignTask = async (taskId) => {
+    try {
+      const response = await axios.post(`http://localhost:8000/system/course/${course.id}/task/assign/`, {task_id: taskId});
+      alert('Tarea asignada correctamente');
+      console.log(response.data);
+    } catch (error) {
+      alert('Error al asignar la tarea');
+    }
+  }
+
   if (!course) {
     return <div><h1 className="text-2xl">Loading...</h1></div>;
   }
@@ -49,7 +60,9 @@ function TeacherCourse() {
               <h2 className="text-2xl font-bold">{task.nombre}</h2>
               <p className="text-gray-500">{task.descripcion}</p>
               <p className="text-gray-500">Fecha de entrega: {task.fecha_entrega}</p>
-              <button className="bg-primary-light hover:bg-primary-dark text-white font-bold py-2 px-4 rounded">Asignar Tarea</button>
+              <button 
+              onClick={() => handleAssignTask(task.id)}
+              className="bg-primary-light hover:bg-primary-dark text-white font-bold py-2 px-4 rounded">Asignar Tarea</button>
             </div>
           ))}
         </div>

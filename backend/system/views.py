@@ -166,10 +166,34 @@ class TaskListView(APIView):
     serializer = TareaSerializer(tasks, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
   
+  
+class AssignTaskView(APIView):
+  permission_classes = [permissions.AllowAny]
+
+  def post(self, request, *args, **kwargs):
+        task_id = request.data.get('task_id')
+        course_id = kwargs.get('curso_id')
+        try:
+            tarea = Tarea.objects.get(id=task_id)
+            curso = Curso.objects.get(id=course_id)
+            estudiantes = curso.estudiantes.all()
+            print("S", estudiantes)
+            
+            for estudiante in estudiantes:
+                Entrega.objects.get_or_create(
+                    tarea=tarea,
+                    estudiante=estudiante,
+                    defaults={'enlace': ''}
+                )
+            
+            return Response({"status": "Tasks assigned successfully"}, status=status.HTTP_200_OK)
+        except (Tarea.DoesNotExist, Curso.DoesNotExist):
+            return Response({"error": "Task or course not found"}, status=status.HTTP_404_NOT_FOUND)
 class CoursesOfAStudentView(APIView):
   permission_classes = [permissions.AllowAny]  
   
   def post(self, request, pkC, pkE):
+    print(pkC, pkE)
     try:
       course = Curso.objects.get(id=pkC)
       print(course)
