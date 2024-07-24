@@ -35,12 +35,12 @@ function AdminCourseCard() {
               </p>
               <div className="flex justify-end gap-2">
                 <button
-                  className="bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark py-2 px-4 rounded-md hover:bg-blue-900 mt-2" >
+                  className="bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-light py-2 px-4 rounded-md hover:bg-blue-900 mt-2" >
                   <i className="bx bx-edit mr-1"></i>
                   Editar
                 </button>
                 <button
-                  className="bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-dark py-2 px-4 rounded-md hover:bg-blue-900 mt-2" >
+                  className="bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-light py-2 px-4 rounded-md hover:bg-blue-900 mt-2" >
                   <i className="bx bx-edit mr-1"></i>
                   Eliminar
                 </button>

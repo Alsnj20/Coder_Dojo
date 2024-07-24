@@ -34,52 +34,60 @@ function AdminCourse() {
     } catch (error) {
       if (error.response.status === 400) {
         alert(error.response.data.non_field_errors[0]);
-      }else{
+      } else {
         alert('Error al crear el curso');
       }
     }
   }
-
   return (
     <section className="container mx-auto py-12 px-6">
-      <Link className='border-spacing-1 hover:border-b-black' to='/admin'><i><i className='bx bx-arrow-back'></i></i>Regresar </Link>
+      <Link className='border-spacing-1 hover:border-b-black' to='/admin'>
+        <i className='bx bx-arrow-back'></i> Regresar
+      </Link>
       <form onSubmit={handleSubmit}>
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h1 className="text-3xl font-bold">Agregar Curso</h1>
           </div>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground dark:text-text-light">
             Llenar el formulario para agregar un nuevo curso a tu plataforma Coder Dojo.
           </p>
-          <Card>
-            <div className="grid gap-2">
-              <label htmlFor="title" className='block text-sm font-medium text-gray-700'>Titulo</label>
+
+          <div className='shadow-md p-3 rounded-md dark:bg-menu-dark md:w-[50vw]'>
+            <div className="grid gap-3 mb-4">
+              <label htmlFor="title" className='block text-sm font-medium dark:text-text-light'>Titulo</label>
               <input
                 id="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Ingrese el título del curso"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="bg-menu-light dark:text-menu-dark  py-1 px-2 rounded-2xl"
+                required
               />
             </div>
-            <div className="grid gap-2">
-              <label htmlFor="description" className='block text-sm font-medium text-gray-700'>Descripción</label>
+            <div className="grid gap-3 mb-4">
+              <label htmlFor="description" className='block text-sm font-medium dark:text-text-light
+              '>Descripción</label>
               <textarea
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Ingrese la descripción del curso"
                 rows={3}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+                className="bg-menu-light py-1 px-2 rounded-2xl dark:text-menu-dark"
+                required
+              />
             </div>
-            <div className="grid gap-2">
-              <label htmlFor="teacher" className='block text-sm font-medium text-gray-700'>Profesor</label>
+            <div className="grid gap-3 mb-4">
+              <label htmlFor="teacher" className='block text-sm font-medium dark:text-text-light'>Profesor</label>
               <select
                 id="teacher"
                 value={teacher}
                 onChange={(e) => setTeacher(e.target.value)}
                 placeholder="Ingrese el nombre del teacher"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                className="bg-menu-light dark:text-menu-dark py-1 px-2 rounded-2xl"
+                required
+              >
                 <option value="" disabled>Seleccione un teacher</option>
                 {teachers.map((profesor) => (
                   <option key={profesor.id} value={profesor.id}>{profesor.name}</option>
@@ -89,16 +97,17 @@ function AdminCourse() {
             <div className='flex justify-end mt-2'>
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 bg-[#0b2d5f] text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
+                className="bg-primary-light rounded-lg p-2 text-text-light hover:bg-[#0a2a54]"
               >
-                <i className='bx bx-save'></i>
-                Guardar
+                <i className='bx bx-save'></i> Guardar
               </button>
             </div>
-          </Card>
+          </div>
         </div>
       </form>
     </section>
-  )
+  );
 }
+
+
 export default AdminCourse;

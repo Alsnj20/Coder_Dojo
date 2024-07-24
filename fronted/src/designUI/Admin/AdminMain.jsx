@@ -57,27 +57,24 @@ function AdminMain() {
 
             <AdminUsersCard title="Usuarios" info={'Agrega, edita y elimina usuarios de la plataforma.'}>
               <button onClick={handleGetUsers}
-                className="inline-flex items-center gap-2 bg-[#0b2d5f] text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
+                className="inline-flex items-center gap-2 
+                bg-primary-light dark:bg-primary-dark
+                text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
               >
                 Ver Usuarios
               </button>
-              <Link to='users/create/'>
-                <button
-                  className="inline-flex items-center gap-2 bg-[#0b2d5f] text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
-                >
-                  Crear Usuario
-                </button>
-              </Link>
             </AdminUsersCard>
             <AdminUsersCard title="Cursos" info={'Agrega, edita y elimina cursos de la plataforma.'}>
               <button onClick={handleGetCourses}
-                className="inline-flex items-center gap-2 bg-[#0b2d5f] text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
+                className="inline-flex items-center gap-2
+                bg-primary-light dark:bg-primary-dark
+                text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
               >
                 Ver Cursos
               </button>
               <Link to='courses/create/'>
                 <button
-                  className="inline-flex items-center gap-2 bg-[#0b2d5f] text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
+                  className="inline-flex items-center gap-2 bg-primary-light dark:bg-primary-dark  text-white px-4 py-2 rounded-md hover:bg-[#0a2a54]"
                 >
                   Crear Curso
                 </button>
