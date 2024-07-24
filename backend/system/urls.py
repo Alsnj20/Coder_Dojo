@@ -31,4 +31,5 @@ urlpatterns = [
   
   # Tareas 
   path("system/course/<int:curso_id>/task/create/", views.TaskCreateView.as_view(), name="task_create"),
+  path("system/course/<int:curso_id>/task/list/", views.TaskListView.as_view(), name="task_list"),
 ]

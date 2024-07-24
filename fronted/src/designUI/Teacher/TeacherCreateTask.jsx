@@ -7,6 +7,7 @@ function TeacherCreateTask({ cursoId }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
+  const [showForm, setShowForm] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,7 +56,9 @@ function TeacherCreateTask({ cursoId }) {
           className='bg-primary-light hover:bg-primary-dark text-white font-bold py-2 px-4 rounded'
           type="submit">Crear tarea</button>
           <button className='bg-secondary-light hover:bg-secondary-dark text-primary-light font-bold py-2 px-4 rounded'
-          type="reset">Cancelar</button>
+          type="reset"
+          onClick={() => setShowForm(false)}
+          >Cancelar</button>
         </div>
       </form>
     </Card>

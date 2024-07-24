@@ -157,6 +157,14 @@ class TaskCreateView(generics.CreateAPIView):
             headers = self.get_success_headers(serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class TaskListView(APIView):
+  permission_classes = [permissions.AllowAny]
+
+  def get(self, request, curso_id):
+    tasks = Tarea.objects.filter(curso=curso_id)
+    serializer = TareaSerializer(tasks, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
   
 class CoursesOfAStudentView(APIView):
   permission_classes = [permissions.AllowAny]  
