@@ -145,11 +145,18 @@ class TaskCreateView(generics.CreateAPIView):
   queryset = Tarea.objects.all()
   serializer_class = TareaSerializer
   permission_classes = [permissions.AllowAny]
-  
-  def get_serializer_context(self):
-    context = super().get_serializer_context()
-    context.update({"request": self.request})
-    return context
+
+  def post(self, request, *args, **kwargs):
+        curso_id = self.kwargs.get('curso_id') 
+        data = request.data.copy()
+        data['curso'] = curso_id  
+        serializer = self.get_serializer(data=data)
+        
+        if serializer.is_valid():
+            self.perform_create(serializer)
+            headers = self.get_success_headers(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
   
 class CoursesOfAStudentView(APIView):
   permission_classes = [permissions.AllowAny]  

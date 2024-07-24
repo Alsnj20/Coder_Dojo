@@ -28,4 +28,7 @@ urlpatterns = [
   # Teachers
   path("system/teacher/list/", views.TeacherListView.as_view(), name="teacher_list"),
   path("system/teacher/course/<int:pk>/", views.CoursesByTeacherView.as_view(), name="teacher_course"),
+  
+  # Tareas 
+  path("system/course/<int:curso_id>/task/create/", views.TaskCreateView.as_view(), name="task_create"),
 ]
