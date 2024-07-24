@@ -1,15 +1,31 @@
 import React from 'react';
 import Card from './Utilities';
 import { Link, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
 
 function AdminCourseCard() {
   const location = useLocation();
   console.log(location.state);
-  const { courses, users } = location.state;
+  const users  = location.state.users;
+  const [courses, setCourses] = useState(location.state.courses);
 
   const searchTeacher = (id) => {
     const teacher = users.find(user => user.id === id);
-    return teacher ? `${teacher.nombre}` : 'No asignado';
+    return teacher ? `${teacher.name}` : 'No asignado';
+  }
+
+  const handleDeleteCourse = async (id) => {
+    console.log(courses);
+    console.log(id);
+    try {
+      await axios.delete(`http://localhost:8000/system/course/${id}/`);
+      location.state.courses = courses.filter(course => course.id !== id);
+      setCourses(courses.filter(course => course.id !== id));
+      alert('Curso eliminado exitosamente');
+    } catch (error) {
+      console.error('Error al eliminar el curso:', error);
+    }
   }
 
   return (
@@ -27,7 +43,7 @@ function AdminCourseCard() {
                   {course.nombre}
                 </h1>
                 <p className="text-sm text-muted-foreground dark:text-muted-foreground">
-                  Profesor: {searchTeacher(course.id)}
+                  Profesor: {searchTeacher(course.docente)}
                 </p>
               </div>
               <p className="font-medium">
@@ -40,6 +56,7 @@ function AdminCourseCard() {
                   Editar
                 </button>
                 <button
+                  onClick={() => handleDeleteCourse(course.id)}
                   className="bg-primary-light dark:bg-primary-dark text-text-light dark:text-text-light py-2 px-4 rounded-md hover:bg-blue-900 mt-2" >
                   <i className="bx bx-edit mr-1"></i>
                   Eliminar

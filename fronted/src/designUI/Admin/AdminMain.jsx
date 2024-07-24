@@ -7,44 +7,46 @@ function AdminMain() {
   const user = useUser().user;
   const [users, setUsers] = useState([]);
   const [courses, setCourses] = useState([]);
-
-
   const navigate = useNavigate();
 
-  const handleGetUsers = async () => {
-    const token = localStorage.getItem('access_token');
-    console.log(user);
-    if (user.tipo !== 'AD') {
-      navigate('access-denied/');
-    } else {
-      try {
-        const response = await axios.get('http://localhost:8000/system/user/list/', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const users = response.data;
-        setUsers(users);
-        navigate('/admin/users', { state: { users } });
-      } catch (error) {
-        console.error('Error al obtener los usuarios:', error);
-        navigate('/admin');
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const token = localStorage.getItem('access_token');
+      if (user.tipo !== 'AD') {
+        navigate('access-denied/');
+      } else {
+        try {
+          const response = await axios.get('http://localhost:8000/system/user/list/', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          setUsers(response.data);
+        } catch (error) {
+          console.error('Error al obtener los usuarios:', error);
+          navigate('/admin');
+        }
       }
-    }
-  };
+    };
+
+    fetchUsers();
+  }, [user, navigate]);
+
+  const handleGetUsers = () => {
+    navigate('/admin/users', { state: { users } });
+  }
 
   const handleGetCourses = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/system/course/list/')
-      const courses = response.data;
-      console.log(courses);
-      setCourses(courses);
-      navigate('/admin/courses', { state: { courses, users } });
+      const response = await axios.get('http://localhost:8000/system/course/list/');
+      setCourses(response.data);
+      console.log("Users", users);
+      navigate('/admin/courses', { state: { courses: response.data, users } });
     } catch (error) {
       console.error('Error al obtener los cursos:', error);
       navigate('/admin');
     }
-  }
+  };
 
   return (
     <main className="flex-1">
@@ -63,6 +65,7 @@ function AdminMain() {
               >
                 Ver Usuarios
               </button>
+
             </AdminUsersCard>
             <AdminUsersCard title="Cursos" info={'Agrega, edita y elimina cursos de la plataforma.'}>
               <button onClick={handleGetCourses}

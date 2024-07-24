@@ -93,7 +93,7 @@ class CourseListView(APIView):
     courses = Curso.objects.all()
     serializer = CursoSerializer(courses, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
-
+  
 class CourseDetailView(APIView):
   permission_classes = [permissions.AllowAny]
 
@@ -106,6 +106,7 @@ class CourseDetailView(APIView):
       return Response({"error": "Curso no encontrado."}, status=status.HTTP_404_NOT_FOUND)
   
   def put(self, request, pk):
+    print("DATA: ",request.data)
     try:
       course = Curso.objects.get(pk=pk)
       serializer = CursoSerializer(course, data=request.data, partial=True)

@@ -53,7 +53,7 @@ class Curso(models.Model):
   estudiantes = models.ManyToManyField(Usuario, limit_choices_to={'tipo': Usuario.Types.STUDENT}, related_name='cursos')
 
   def __str__(self):
-    return "{Course: "+ self.nombre+",Docente: "+self.docente.username+"}"
+    return "{Course: "+ self.nombre+",Teacher: "+self.docente.name+"}"
   
 class Tarea(models.Model):
   nombre = models.CharField(max_length=50)
