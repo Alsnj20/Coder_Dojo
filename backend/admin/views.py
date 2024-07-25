@@ -92,3 +92,12 @@ class CourseDetailView(APIView):
       return Response(status=status.HTTP_204_NO_CONTENT)
     except Curso.DoesNotExist:
       return Response({"error": "Curso no encontrado."}, status=status.HTTP_404_NOT_FOUND)
+
+class TeacherListView(APIView):
+  permission_classes = [permissions.AllowAny]
+
+  def get(self, request):
+    teachers = Usuario.objects.filter(tipo='TC')
+    serializer = UsuarioSerializer(teachers, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+

@@ -1,6 +1,7 @@
 from django.urls import include, path
 from .import views
 from admin import views as admin_views
+from teacher import views as teacher_views
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
@@ -18,13 +19,14 @@ urlpatterns = [
   path("system/user/login/", views.LoginView.as_view(), name="login"),
 
   # ADMIN
-  # Usuarios
+  # usuarios
   path("system/user/list/", admin_views.UserListView.as_view(), name="user_list"),
   path("system/user/<int:pk>/",admin_views.UserDetailView.as_view(), name="user_detail"),
-  # Cursos
+  # cursos
   path("system/course/create/", admin_views.CourseCreateView.as_view() ,name="course_create"),
   path("system/course/list/", admin_views.CourseListView.as_view(), name="course_list"),
   path("system/course/<int:pk>/", admin_views.CourseDetailView.as_view(), name="course_detail"),
+  path("system/teacher/list/", admin_views.TeacherListView.as_view(), name="teacher_list"),
   
   # Inscripción a cursos
   path("system/student/enroll/<int:pkC>/<int:pkE>/", views.CoursesOfAStudentView.as_view(), name="enroll-student"), 
@@ -34,13 +36,12 @@ urlpatterns = [
   path("system/student/<int:student_id>/assigned_tasks/", views.AssignedTasksView.as_view(), name="assigned_tasks"),
   path("system/student/<int:user_id>/delivery/", views.CreateorUpdateEntregaView.as_view(), name="create_or_update_entrega"),
   
+  # TEACHER
   # Teachers
-  path("system/teacher/list/", views.TeacherListView.as_view(), name="teacher_list"),
-  path("system/teacher/course/<int:pk>/", views.CoursesByTeacherView.as_view(), name="teacher_course"),
-  
+  path("system/teacher/course/<int:pk>/", teacher_views.CoursesByTeacherView.as_view(), name="teacher_course"),
   # Tareas 
-  path("system/course/<int:curso_id>/task/create/", views.TaskCreateView.as_view(), name="task_create"),
-  path("system/course/<int:curso_id>/task/list/", views.TaskListView.as_view(), name="task_list"),
+  path("system/course/<int:curso_id>/task/create/", teacher_views.TaskCreateView.as_view(), name="task_create"),
+  path("system/course/<int:curso_id>/task/list/", teacher_views.TaskListView.as_view(), name="task_list"),
   path("system/course/<int:curso_id>/task/assign/", views.AssignTaskView.as_view(), name="task_detail"),
   
   # Entregas
