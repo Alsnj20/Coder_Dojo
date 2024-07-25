@@ -60,6 +60,7 @@ class Tarea(models.Model):
   descripcion = models.TextField()
   curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
   fecha_entrega = models.DateTimeField()
+  asignada = models.BooleanField(default=False)
 
   def __str__(self):
     return "{Task: "+ self.nombre+",Course: "+self.curso.nombre+"}"

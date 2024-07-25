@@ -3,6 +3,7 @@ import { useUser } from "../../components/useContext"
 import TeacherCreateTask from "./TeacherCreateTask";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Task } from "./Task";
 
 function TeacherCourse() {
   const { user } = useUser();
@@ -23,12 +24,13 @@ function TeacherCourse() {
     getTasks();
   }, [course.id]);
 
-
   const handleAssignTask = async (taskId) => {
     try {
-      const response = await axios.post(`http://localhost:8000/system/course/${course.id}/task/assign/`, {task_id: taskId});
+      const response = await axios.post(`http://localhost:8000/system/course/${course.id}/task/assign/`, { task_id: taskId });
       alert('Tarea asignada correctamente');
       console.log(response.data);
+      window.location.reload();
+      
     } catch (error) {
       alert('Error al asignar la tarea');
     }
@@ -53,17 +55,16 @@ function TeacherCourse() {
         <TeacherCreateTask cursoId={course.id} />
       </section>
       <section className="container mx-auto py-12 px-6">
-        <h1 className="text-3xl font-bold">Tareas</h1>
+        <h1 className="text-3xl font-bold">Tareas No Asignadas</h1>
         <div className="grid gap-4 mt-6">
-          {tasks.map((task) => (
-            <div className="bg-gray-200 p-4 rounded-lg" key={task.id}>
-              <h2 className="text-2xl font-bold">{task.nombre}</h2>
-              <p className="text-gray-500">{task.descripcion}</p>
-              <p className="text-gray-500">Fecha de entrega: {task.fecha_entrega}</p>
-              <button 
-              onClick={() => handleAssignTask(task.id)}
-              className="bg-primary-light hover:bg-primary-dark text-white font-bold py-2 px-4 rounded">Asignar Tarea</button>
-            </div>
+          {tasks.filter(task => !task.asignada).map((task) => (
+            <Task key={task.id} task={task} handleAssignTask={handleAssignTask} />
+          ))}
+        </div>
+        <h1 className="text-3xl font-bold">Tareas Asignadas</h1>
+        <div className="grid gap-4 mt-6">
+          {tasks.filter(task => task.asignada).map((task) => (
+            <Task key={task.id} task={task} handleAssignTask={handleAssignTask} />
           ))}
         </div>
       </section>

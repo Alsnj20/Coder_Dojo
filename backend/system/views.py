@@ -167,6 +167,20 @@ class TaskListView(APIView):
     return Response(serializer.data, status=status.HTTP_200_OK)
   
   
+class DeliveryByTaskView(APIView):
+  permission_classes = [permissions.AllowAny]
+  
+  def post(self, request, *args, **kwargs):
+    task_id = request.data.get('task_id')
+    try:
+      task = Tarea.objects.get(id=task_id)
+      deliveries = Entrega.objects.filter(tarea=task)
+      serializer = EntregaSerializer(deliveries, many=True)
+      return Response(serializer.data, status=status.HTTP_200_OK)
+    except:
+      return Response({"error": "Deliveries not found"}, status=status.HTTP_404_NOT_FOUND)
+  
+  
 class AssignTaskView(APIView):
   permission_classes = [permissions.AllowAny]
 
@@ -186,9 +200,29 @@ class AssignTaskView(APIView):
                     defaults={'enlace': ''}
                 )
             
+            tarea.asignada = True
+            tarea.save()
+            print(tarea.__dict__)
+            
             return Response({"status": "Tasks assigned successfully"}, status=status.HTTP_200_OK)
         except (Tarea.DoesNotExist, Curso.DoesNotExist):
             return Response({"error": "Task or course not found"}, status=status.HTTP_404_NOT_FOUND)
+          
+class GradeDeliveryView(APIView):
+  permission_classes = [permissions.AllowAny]
+  
+  def post(self, request, *args, **kwargs):
+        entrega_id = request.data.get('delivery_id')
+        grade = request.data.get('grade')
+        try:
+            print(entrega_id, grade)
+            entrega = Entrega.objects.get(id=entrega_id)
+
+            entrega.calificacion = grade
+            entrega.save()
+            return Response({"status": "Grade assigned successfully"}, status=status.HTTP_200_OK)
+        except Entrega.DoesNotExist:
+            return Response({"error": "Delivery not found"}, status=status.HTTP_404_NOT_FOUND)
           
           
 class StudentAssignmentsView(generics.ListAPIView):
@@ -241,7 +275,66 @@ class AssignedTasksView(generics.ListAPIView):
         try:
             user = Usuario.objects.get(id=student_id, tipo=Usuario.Types.STUDENT)
             cursos_ids = user.cursos.values_list('id', flat=True)
-            return Tarea.objects.filter(curso__id__in=cursos_ids)
+            print("Cursos ",cursos_ids)
+            serializer = TareaSerializer(Tarea.objects.filter(curso__id__in=cursos_ids), many=True)
+            return serializer.data
         except Usuario.DoesNotExist:
             return Tarea.objects.none()
+        except Entrega.DoesNotExist:
+            print("Entrega no encontrada")
+            return Tarea.objects.none()
     
+# Student entregas
+class CreateorUpdateEntregaView(generics.CreateAPIView):
+    serializer_class = EntregaSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request, user_id, *args, **kwargs):
+        try:
+            user = Usuario.objects.get(id=user_id)
+        except Usuario.DoesNotExist:
+            return Response({"error": "Usuario no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+          
+        print("User ",user)
+        if user.tipo != Usuario.Types.STUDENT:
+            return Response({"error": "Permiso denegado"}, status=status.HTTP_403_FORBIDDEN)
+        
+        tarea_id = request.data.get('tarea')
+        print("Tarea ",tarea_id)
+        url = request.data.get('url')
+        print("Enlace ",url)
+
+        try:
+            tarea = Tarea.objects.get(id=tarea_id)
+        except Tarea.DoesNotExist:
+            return Response({"error": "Tarea no encontrada"}, status=status.HTTP_404_NOT_FOUND)
+
+        entrega, created = Entrega.objects.get_or_create(
+            tarea=tarea,
+            estudiante=user,
+            defaults={'enlace': url}
+        )
+
+        if not created:
+            entrega.enlace = url
+            entrega.save()
+
+        return Response(EntregaSerializer(entrega).data, status=status.HTTP_200_OK)
+      
+      
+class UpdateEntregaView(generics.UpdateAPIView):
+    queryset = Entrega.objects.all()
+    serializer_class = EntregaSerializer
+    permission_classes = [permissions.AllowAny]
+    
+    def put(self, request, *args, **kwargs):
+        entrega = self.get_object()
+        url = request.data.get('url')
+        entrega.enlace = url
+        entrega.save()
+        return Response(EntregaSerializer(entrega).data, status=status.HTTP_200_OK)
+      
+    def delete(self, request, *args, **kwargs):
+        entrega = self.get_object()
+        entrega.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

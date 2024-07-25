@@ -7,6 +7,8 @@ function StudentMain() {
   const [cursos, setCursos] = useState([])
   const [misCursos, setMisCursos] = useState([])
   const [tareasAsignadas, setTareasAsignadas] = useState([])
+  const [url, setUrl] = useState('')
+  const [submissions, setSubmissions] = useState([])
 
   useEffect(() => {
     const getCursos = async () => {
@@ -62,6 +64,20 @@ function StudentMain() {
     return course ? 'Inscrito' : 'Inscribirse'
   }
 
+  const handleSubmitDelivery = async (taskId, url) => {
+    console.log('Submit delivery:', taskId)
+    console.log('URL:', url)
+    try {
+      const response = await axios.post(`http://localhost:8000/system/student/${user.id}/delivery/`, { tarea: taskId, url: url })
+      alert('Entrega enviada correctamente')
+      setTareasAsignadas(prevTasks => prevTasks.filter(task => task.id !== taskId))
+      setSubmissions([...submissions, response.data])     
+      console.log(response.data)
+    } catch (error) {
+      console.error('Error al enviar la entrega:', error)
+    }
+  }
+
   return (
     <main className="flex-1">
       <section className="container mx-auto py-12 px-6">
@@ -111,7 +127,20 @@ function StudentMain() {
                     <h2 className="text-xl font-bold text-primary-light dark:text-primary-dark">{tarea.nombre}</h2>
                     <p className="text-sm text-muted-foreground dark:text-muted-foreground">Curso: {tarea.curso.nombre}</p>
                     <p className="font-medium">{tarea.descripcion}</p>
+                    <p className='font-medium'> Calificación: {tarea.calificacion} </p>
                     <p className="font-medium">Fecha de entrega: {new Date(tarea.fecha_entrega).toLocaleString()}</p>
+                    <input
+                      type="url"
+                      placeholder="Enlace de la entrega"
+                      onChange={(e) => setUrl(e.target.value)}
+                      className="block mt-2 p-2 border border-gray-300 rounded"
+                    />
+                    <button
+                      onClick={() => { handleSubmitDelivery(tarea.id, url) }}
+                      className={submissions[tarea.id] ? 'bg-secondary-light dark:bg-secondary-dark text-white px-4 py-2 rounded-md cursor-not-allowed' : 'bg-primary-light dark:bg-primary-dark text-white px-4 py-2 rounded-md'}
+                    >
+                      {submissions[tarea.id] ? 'Entregado' : 'Enviar entrega'}
+                    </button>
                   </div>
                 ))}
               </div>
