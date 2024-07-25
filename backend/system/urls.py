@@ -1,26 +1,30 @@
 from django.urls import include, path
 from .import views
+from admin import views as admin_views
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
 urlpatterns = [
-  # Registro de usuarios
-  path("system/user/register/", views.CreateUserView.as_view(), name="register"),
   # Tokens de autenticación
   # Token => Existe una cuenta
   path("system/token/", TokenObtainPairView.as_view(), name="get_token"),
   path("system/token/refresh/", TokenRefreshView.as_view(), name="refresh"),
   # Usuarios
   path("system-auth/", include("rest_framework.urls", namespace="rest_framework")), 
+  
+  # Registro de usuarios
+  path("system/user/register/", views.CreateUserView.as_view(), name="register"),
+  
   # Login
   path("system/user/login/", views.LoginView.as_view(), name="login"),
 
+  # ADMIN
   # Usuarios
-  path("system/user/list/", views.UsersView.as_view(), name="user_list"),
-  path("system/user/<int:pk>/", views.UserDetailView.as_view(), name="user_detail"),
-  
+  path("system/user/list/", admin_views.UserListView.as_view(), name="user_list"),
+  path("system/user/<int:pk>/",admin_views.UserDetailView.as_view(), name="user_detail"),
   # Cursos
-  path("system/course/create/", views.CourseCreateView.as_view() ,name="course_create"),
-  path("system/course/list/", views.CourseListView.as_view(), name="course_list"),
-  path("system/course/<int:pk>/", views.CourseDetailView.as_view(), name="course_detail"),
+  path("system/course/create/", admin_views.CourseCreateView.as_view() ,name="course_create"),
+  path("system/course/list/", admin_views.CourseListView.as_view(), name="course_list"),
+  path("system/course/<int:pk>/", admin_views.CourseDetailView.as_view(), name="course_detail"),
   
   # Inscripción a cursos
   path("system/student/enroll/<int:pkC>/<int:pkE>/", views.CoursesOfAStudentView.as_view(), name="enroll-student"), 
@@ -42,5 +46,6 @@ urlpatterns = [
   # Entregas
   path("system/course/task/deliveries/grade/", views.GradeDeliveryView.as_view(), name="delivery_grade"),
   path("system/course/task/deliveries/", views.DeliveryByTaskView.as_view(), name="deliveries_list"),
+  
 ]
 
