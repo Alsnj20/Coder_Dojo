@@ -50,8 +50,10 @@ urlpatterns = [
   path("system/student/<int:pk>/courses/", student_views.StudentMyCourses.as_view(), name="student_mycourses"),
   # tareas asignadas a un estudiante
   path("system/student/<int:student_id>/assigned_tasks/", student_views.AssignedTasksView.as_view(), name="assigned_tasks"),
+  # tareas entregadas por un estudiante
+  path("system/student/<int:student_id>/submitted_tasks/", student_views.SubmittedTasksView.as_view(), name="submitted_tasks"),
   # entregas
-  path("system/student/<int:user_id>/delivery/", student_views.CreateorUpdateEntregaView.as_view(), name="create_or_update_entrega"),
+  path("system/student/<int:user_id>/delivery/", student_views.UpdateEntregaView.as_view(), name="create_entrega"),
   
 ]
 

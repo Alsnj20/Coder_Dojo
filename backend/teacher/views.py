@@ -69,7 +69,7 @@ class AssignTaskView(APIView):
     except (Tarea.DoesNotExist, Curso.DoesNotExist):
       return Response({"error": "Task or course not found"}, status=status.HTTP_404_NOT_FOUND)
     
-# Task Deliveries
+# list deliveries by task
 class DeliveryByTaskView(APIView):
   permission_classes = [permissions.AllowAny]
   
@@ -83,6 +83,7 @@ class DeliveryByTaskView(APIView):
     except:
       return Response({"error": "Deliveries not found"}, status=status.HTTP_404_NOT_FOUND)
         
+# Update delivery grade
 class GradeDeliveryView(APIView):
   permission_classes = [permissions.AllowAny]
   

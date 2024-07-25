@@ -21,7 +21,7 @@ export function Task({ task = {}, handleAssignTask }) {
     try {
       const response = await axios.post(`http://localhost:8000/system/course/task/deliveries/grade/`, { delivery_id: deliveryId, grade: parseInt(grade) });
       console.log(response.data);
-      alert('Entrega calificada correctamente')
+      window.location.reload();
     } catch (error) {
       alert('Error al calificar la entrega');
     }

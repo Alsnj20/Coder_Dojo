@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useUser } from '../../components/useContext';
 
@@ -6,9 +6,9 @@ function StudentMain() {
   const { user } = useUser()
   const [cursos, setCursos] = useState([])
   const [misCursos, setMisCursos] = useState([])
-  const [tareasAsignadas, setTareasAsignadas] = useState([])
+  const [entregasAsignadas, setEntregasAsignadas] = useState([])
   const [url, setUrl] = useState('')
-  const [submissions, setSubmissions] = useState([])
+  const [entregasEnviadas, setEntregasEnviadas] = useState([])
 
   useEffect(() => {
     const getCursos = async () => {
@@ -20,7 +20,23 @@ function StudentMain() {
       }
     }
     getCursos()
-  }, [user.id])
+  }, [])
+
+  const enrollCourse = async (courseId) => {
+    console.log('Enroll course:', courseId)
+    try {
+      const response = await axios.post(`http://localhost:8000/system/student/enroll/${courseId}/${user.id}/`)
+      console.log("Cambios " + response.data)
+      window.location.reload();
+    } catch (error) {
+      console.error('Error al unirse al curso:', error)
+    }
+  }
+
+  const statusEnroll = (courseId) => {
+    const course = misCursos.find((curso) => curso.id === courseId)
+    return course ? 'Inscrito' : 'Inscribirse'
+  }
 
 
   useEffect(() => {
@@ -37,44 +53,51 @@ function StudentMain() {
 
   useEffect(() => {
     const getAssignedTasks = async () => {
-      console.log("User ", user.id)
       try {
-        const response = await axios.get(`http://localhost:8000/system/student/${user.id}/assigned_tasks/`, {user_id: user.id})
-        console.log(response.data)
-        setTareasAsignadas(response.data)
+        const response = await axios.get(`http://localhost:8000/system/student/${user.id}/assigned_tasks/`, { user_id: user.id })
+        console.log("Asignadas", response.data)
+        setEntregasAsignadas(response.data)
       } catch (error) {
         console.error('Error al obtener las tareas asignadas:', error)
       }
     }
+
+    const getSubmittedTasks = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/system/student/${user.id}/submitted_tasks/`)
+        console.log("Entregas", response.data)
+        setEntregasEnviadas(response.data)
+      } catch (error) {
+        console.error('Error al obtener las entregas:', error)
+      }
+    }
+
     getAssignedTasks()
+    getSubmittedTasks()
   }, [user.id])
 
-  const enrollCourse = async (courseId) => {
-    console.log('Enroll course:', courseId)
-    try {
-      const response = await axios.post(`http://localhost:8000/system/student/enroll/${courseId}/${user.id}/`)
-      console.log("Cambios " + response.data)
-    } catch (error) {
-      console.error('Error al unirse al curso:', error)
-    }
-  }
-
-  const statusEnroll = (courseId) => {
-    const course = misCursos.find((curso) => curso.id === courseId)
-    return course ? 'Inscrito' : 'Inscribirse'
-  }
-
   const handleSubmitDelivery = async (taskId, url) => {
-    console.log('Submit delivery:', taskId)
-    console.log('URL:', url)
+    if (!url) {
+      alert('Por favor, ingrese un enlace de entrega')
+      return
+    }
     try {
       const response = await axios.post(`http://localhost:8000/system/student/${user.id}/delivery/`, { tarea: taskId, url: url })
       alert('Entrega enviada correctamente')
-      setTareasAsignadas(prevTasks => prevTasks.filter(task => task.id !== taskId))
-      setSubmissions([...submissions, response.data])     
       console.log(response.data)
+      window.location.reload();
     } catch (error) {
       console.error('Error al enviar la entrega:', error)
+    }
+  }
+
+  const changeColor = (grade) =>{
+    if(grade >= 0 && grade <= 10){
+      return 'text-red-500'
+    } else if(grade > 10 && grade <= 15){
+      return 'text-yellow-500'
+    } else if(grade > 15 && grade <= 20){
+      return 'text-green-500'
     }
   }
 
@@ -97,7 +120,7 @@ function StudentMain() {
                       <button
                         onClick={() => enrollCourse(curso.id)}
 
-                        className={`${statusEnroll(curso.id) !== 'Inscrito' ? 'bg-primary-light dark:bg-primary-dark' : 'bg-secondary-light dark:bg-secondary-dark'} text-white px-4 py-2 rounded-md`}
+                        className={`${statusEnroll(curso.id) !== 'Inscrito' ? 'bg-primary-light dark:bg-primary-dark' : 'bg-secondary-light dark:bg-secondary-dark cursor-not-allowed'} text-white px-4 py-2 rounded-md`}
                       >
                         <i className="bx bx-edit mr-1"></i>
                         {statusEnroll(curso.id)}
@@ -109,7 +132,7 @@ function StudentMain() {
             </section>
             <section>
               <h1>Mis Cursos</h1>
-              <div className="grid md:grid-cols-3 gap-3">
+              <div className="grid md:grid-cols-2 gap-3 ">
                 {misCursos.map((curso) => (
                   <div className="bg-card-opt dark:bg-gray-800 rounded-md shadow-md p-4" key={curso.id}>
                     <h2 className="text-xl font-bold text-primary-light dark:text-primary-dark">{curso.nombre}</h2>
@@ -122,13 +145,12 @@ function StudentMain() {
             <section>
               <h1>Tareas Asignadas</h1>
               <div className="grid gap-3">
-                {tareasAsignadas.map((tarea) => (
-                  <div className="bg-white dark:bg-gray-800 rounded-md shadow-md p-4" key={tarea.id}>
-                    <h2 className="text-xl font-bold text-primary-light dark:text-primary-dark">{tarea.nombre}</h2>
-                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">Curso: {tarea.curso.nombre}</p>
-                    <p className="font-medium">{tarea.descripcion}</p>
-                    <p className='font-medium'> Calificación: {tarea.calificacion} </p>
-                    <p className="font-medium">Fecha de entrega: {new Date(tarea.fecha_entrega).toLocaleString()}</p>
+                {entregasAsignadas.map((entrega) => (
+                  <div className="bg-white dark:bg-gray-800 rounded-md shadow-md p-4" key={entrega.id}>
+                    <h2 className="text-xl font-bold text-primary-light dark:text-primary-dark">{entrega.tarea.nombre}</h2>
+                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">Curso: {entrega.tarea.curso.nombre}</p>
+                    <p className="font-medium">{entrega.tarea.descripcion}</p>
+                    <p className="font-medium">Fecha de entrega: {new Date(entrega.tarea.fecha_entrega).toLocaleString()}</p>
                     <input
                       type="url"
                       placeholder="Enlace de la entrega"
@@ -136,19 +158,34 @@ function StudentMain() {
                       className="block mt-2 p-2 border border-gray-300 rounded"
                     />
                     <button
-                      onClick={() => { handleSubmitDelivery(tarea.id, url) }}
-                      className={submissions[tarea.id] ? 'bg-secondary-light dark:bg-secondary-dark text-white px-4 py-2 rounded-md cursor-not-allowed' : 'bg-primary-light dark:bg-primary-dark text-white px-4 py-2 rounded-md'}
+                      onClick={() => { handleSubmitDelivery(entrega.tarea.id, url) }}
+                      className='bg-primary-light dark:bg-primary-dark rounded-lg text-text-light px-4 py-2 mt-2'
                     >
-                      {submissions[tarea.id] ? 'Entregado' : 'Enviar entrega'}
+                      <i className="bx bx-upload mr-1"></i>
+                      Enviar entrega
                     </button>
                   </div>
                 ))}
               </div>
-
             </section>
+            <section>
+              <h1>Tareas Enviadas</h1>
+              <div className="grid gap-3">
+                {entregasEnviadas.map((entrega) => (
+                  <div className="bg-white dark:bg-gray-800 rounded-md shadow-md p-4" key={entrega.id}>
+                    <h2 className="text-xl font-bold text-primary-light dark:text-primary-dark">{entrega.tarea.nombre}</h2>
+                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">Curso: {entrega.tarea.curso}</p>
+                    <p className="font-medium">Fecha de entrega: {new Date(entrega.tarea.fecha_entrega).toLocaleString()}</p>
+                    <p className="font-medium">Entrega: <a className="text-primary-light"
+                      href={entrega.enlace} target="_blank" rel="noreferrer">{entrega.enlace}</a></p>
+                    <p className={changeColor(entrega.calificacion)}>Calificación: {entrega.calificacion}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
     </main >
   )
 }

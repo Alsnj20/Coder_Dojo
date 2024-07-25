@@ -19,6 +19,7 @@ function TeacherCreateTask({ cursoId }) {
         fecha_entrega: date,
         curso_id: cursoId,
       })
+      alert('Tarea creada con éxito')
       console.log("Tarea Creada ", response.data)
 
     }catch{
