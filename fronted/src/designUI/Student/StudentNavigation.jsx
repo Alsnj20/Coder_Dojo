@@ -1,44 +1,55 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useUser } from "../../components/useContext";
-function StudentNavigation() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+import Button from '../Home/Button';
+
+function StudentNavigation({isDarkMode, setIsDarkMode}) {
   const { user, logout } = useUser();
-
-  const handleLogout = () => {
-    logout();
-  }
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
   return (
-    <header className="bg-[#0b2d5f] text-white py-4 px-6 flex justify-between items-center">
+    <header className="
+    dark:bg-primary-light
+     text-primary-dark dark:text-text-light py-6 px-6 shadow-sm flex justify-between items-center w-full z-1000">
       <div className="flex items-center gap-4">
-        <Link to="/" onClick={handleLogout}
-          className="flex items-center">
-          <span className="text-2xl font-bold"> <i className="text-3xl text-white bx bx-code-alt"></i> CoderDojo</span>
-        </Link>
+        <a href="/" className="flex items-center">
+          <span className="text-xl md:text-2xl font-bold text-text-dark dark:text-text-light">
+            <i className="text-3xl text-text-dark dark:text-text-light bx bx-code-alt"></i> CoderDojo
+          </span>
+        </a>
       </div>
-      <nav className="hidden md:flex gap-8">
-        <a href="#" className="hover:border-b-2 border-white ">Tareas</a>
-        <a href="#" className="hover:border-b-2 border-white ">Courses</a>
+      <nav className={`flex-col md:flex-row md:flex gap-8 items-center ${isMenuOpen ? 'flex' : 'hidden'} 
+      md:flex absolute md:relative top-24 md:top-0 right-0 md:left-auto 
+      px-8 py-4 md:py-0 md:px-0
+      md:w-auto bg-menu-light dark:bg-menu-dark md:bg-transparent
+      md:dark:bg-transparent
+      animate-open-menu md:animate-none
+      z-50 md:z-auto`
+      }>
+        <a href="#" className="font-semibold hover:border-b-2 border-primary-light dark:border-text-dark">Cursos</a>
+        <a href="#" className="font-semibold hover:border-b-2 border-primary-light dark:border-text-dark">Tareas</a>
+        <div className="flex items-center gap-2">
+          <i className="text-gray-700 rounded-full bg-gray-300 bx bx-user p-2"></i>
+          <span>Bienvenido, {user.name}</span>
+        </div>
       </nav>
       <div className="flex items-center gap-4">
-        <div>
-        <i className={`text-gray-700 rounded-full bg-gray-300 bx bx-user p-2`}></i>
-          <span> Bienvenido, {user.name}</span>
-        </div>
+        <Button onClick={logout}
+
+          text="Cerrar Sesión" icon="bx bx-log-out" url='/' />
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
-          className="rounded-full"
         >
-          <i className={`w-8  h-8 text-2xl rounded-full hover:bg-white hover:text-[#0b2d5f] ${isDarkMode ? "bx bx-sun" : "bx bx-moon"}`}></i>
+          <i className={`w-8 h-8 text-2xl 
+            text-primary-light dark:text-text-light
+           ${isDarkMode ? 'bx bx-sun' : 'bx bx-moon'}`}></i>
           <span className="sr-only">Toggle dark mode</span>
         </button>
         <button
-          onClick={handleLogout}
-          className="bg-white h-8 text-[#0b2d5f] px-4 py-2 rounded-md hover:bg-[#e6e6e6] flex items-center gap-2"
+          className="md:hidden"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          <i className="text-lg bx bx-log-out" style={{ color: '#0b2d5f' }}></i>
-          Logout
+          <i className="bx bx-menu text-3xl"></i>
         </button>
       </div>
     </header>

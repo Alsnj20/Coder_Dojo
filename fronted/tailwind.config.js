@@ -9,17 +9,19 @@ export default {
       },
       colors: {
         primary: {
-          light: '#0b2d5f', 
+          light: '#0b2d5f',
           dark: '#0a224d',
+          opt: '#2c2c2c',
         },
         secondary: {
-          light: '#e6e6e6', 
+          light: '#e6e6e6',
           dark: '#b3b3b3',
         },
         accent: '#ffcc00',
         text: {
           light: '#ffffff',
-          dark: '#d1d5db', 
+          dark: '#000000',
+          optional: '#0b2d5f',
         },
         muted: {
           foreground: '#6c757d',
@@ -27,11 +29,29 @@ export default {
         card: {
           light: '#ffffff',
           dark: '#d1d5db',
+          opt: '#dee9f8'
         },
+        menu: {
+          light: '#d9d9d9',
+          dark: '#455064'
+        }
       },
-      backgroundColor: {
-        'gradient-light': 'bg-gradient-to-r from-[#0b2d5f] to-[#0b2d5f]',
-        'gradientdark': 'bg-gradient-to-r from-[#1F2937] to-[#1D2735]',
+      backgroundImage: {
+        'bgHome': 'linear-gradient(to bottom, #7fd7fd, #8cdcfc, #98e0fa, #a5e5fa, #b1e9f9, #beecfc, #caeffe, #d6f2ff, #e4f4ff, #f0f7ff, #f9faff, #ffffff)'
+      },
+      animation:{
+        'move-cloud': 'moveCloud 20s linear infinite',
+        'open-menu': 'openMenu 0.5s ease-in-out'
+      },
+      keyframes: {
+        moveCloud: {
+          '0%': { transform: 'translateX(-2%)' },
+          '100%': { transform: 'translateX(60%)' },
+        },
+        openMenu: {
+          '0%': { marginRight: '-10%' },
+          '100%': { marginRight: '0' },
+        }
       },
     }
   },

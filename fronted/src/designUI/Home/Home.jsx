@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
 import HomeNavigation from './HomeNavigation';
 import HomeMain from './HomeMain';
 import HomeFooter from './HomeFooter';
-import AccessDenied from "../../components/AccessDenied";
+import HomeRol from "./HomeRol";
+import HomeAboutUs from "./HomeAboutUs";
 function Home() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -16,11 +16,15 @@ function Home() {
   }, [isDarkMode]);
 
   return (
-    <div className="bg-gray-100
-    dark:bg-gradient-to-r dark:from-[#1F2937] dark:to-[#1D2735]">
+    <div className="w-screen
+    dark:bg-[#2c2c2c]
+    ">
       <HomeNavigation isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       <HomeMain />
+      <HomeRol/>
+      <HomeAboutUs />
       <HomeFooter />
+
     </div>
   );
 }

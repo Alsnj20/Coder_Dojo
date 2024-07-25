@@ -2,12 +2,18 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from './useContext';
 
 function RegisterUser() {
+  const {login} = useUser();
   const [formData, setFormData] = useState({
     email: '',
     name: '',
     tipo: 'ST',
+    password: ''
+  });
+  const [formDataLogin, setFormDataLogin] = useState({
+    email: '',
     password: ''
   });
   const navigate = useNavigate();
@@ -20,21 +26,38 @@ function RegisterUser() {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:8000/system/user/register/', formData);
-      const userA = response.data
-      const userT = userA.tipo;
-
-      if (userT === 'ST') {
-        navigate('/student', {state: userA});
-      } else if (userT === 'TC') {
-        navigate('/teacher', {state: userA});
-      }else if (userT === 'AD'){
-        console.log('Admin', userA)
-        navigate('/admin', {state: userA})
-      }else{
-        navigate('/')
-      }
+      console.log('Usuario registrado:', response.data);
+      formDataLogin.email = formData.email;
+      formDataLogin.password = formData.password;
+      loginUser(e);
     } catch (error) {
       console.error('Error al registrar usuario:', error);
+    }
+  };
+
+  const loginUser = async (e) => {
+    e.preventDefault();
+    const { email, password } = formDataLogin;
+    try {
+      const response = await axios.post('http://localhost:8000/system/user/login/', { email, password });
+      const access = response.data.access_token;
+      const refresh = response.data.refresh_token;
+      const user = response.data.user;
+      const userT = user.tipo;
+      login(user, {access: access, refresh: refresh});
+
+      if (userT === 'ST') {
+        navigate('/student', { state: user });
+      } else if (userT === 'TC') {
+        navigate('/teacher', { state: user });
+      } else if (userT === 'AD') {
+        console.log('Admin', user);
+        navigate('/admin', { state: user });
+      } else {
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('Error al iniciar sesión (No existe la cuenta):', error);
     }
   };
 

@@ -53,13 +53,14 @@ class Curso(models.Model):
   estudiantes = models.ManyToManyField(Usuario, limit_choices_to={'tipo': Usuario.Types.STUDENT}, related_name='cursos')
 
   def __str__(self):
-    return "{Course: "+ self.nombre+",Docente: "+self.docente.username+"}"
+    return "{Course: "+ self.nombre+",Teacher: "+self.docente.name+"}"
   
 class Tarea(models.Model):
   nombre = models.CharField(max_length=50)
   descripcion = models.TextField()
   curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
   fecha_entrega = models.DateTimeField()
+  asignada = models.BooleanField(default=False)
 
   def __str__(self):
     return "{Task: "+ self.nombre+",Course: "+self.curso.nombre+"}"

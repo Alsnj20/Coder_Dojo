@@ -42,7 +42,7 @@ function LoginUser(){
       }
 
     } catch (error) {
-      console.error('Error al iniciar sesión:', error);
+      console.error('Error al iniciar sesión (No existe la cuenta):', error);
       setUserType(null);
     }
   }
@@ -89,7 +89,7 @@ function LoginUser(){
           ¿No tienes una cuenta? <Link to="/register" className="text-primary-light dark:text-primary-dark">Registrarse</Link>
         </p>
         <p className="text-center mt-4 text-green-500">
-          {userType === 'ST' ? 'Estudiante' : userType === 'PR' ? 'Profesor' : 'Acceso denegado'}
+          {userType === 'ST' ? 'Estudiante' : userType === 'PR' ? 'Profesor' : 'Acceso denegado(Ingrese un usuario válido)'}
         </p>
       </div>
     </div>

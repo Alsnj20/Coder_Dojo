@@ -41,10 +41,17 @@ class CursoSerializer(serializers.ModelSerializer):
     return data
 
 class TareaSerializer(serializers.ModelSerializer):
-  curso = CursoSerializer(read_only=True)
+  curso = serializers.PrimaryKeyRelatedField(queryset=Curso.objects.all())
+  
   class Meta:
     model = Tarea
-    fields = ['id', 'nombre', 'descripcion', 'curso', 'fecha_entrega']
+    fields = ['id', 'nombre', 'descripcion', 'curso', 'fecha_entrega', 'asignada']
+    
+  def to_representation(self, instance):
+    representation = super().to_representation(instance)
+    entrega = Entrega.objects.filter(tarea=instance).first()
+    representation['calificacion'] = entrega.calificacion if entrega else None
+    return representation    
   
 class EntregaSerializer(serializers.ModelSerializer):
   tarea = TareaSerializer(read_only=True)
