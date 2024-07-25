@@ -2,6 +2,7 @@ from django.urls import include, path
 from .import views
 from admin import views as admin_views
 from teacher import views as teacher_views
+from student import views as student_views
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
@@ -18,6 +19,7 @@ urlpatterns = [
   # Login
   path("system/user/login/", views.LoginView.as_view(), name="login"),
 
+
   # ADMIN
   # usuarios
   path("system/user/list/", admin_views.UserListView.as_view(), name="user_list"),
@@ -27,6 +29,7 @@ urlpatterns = [
   path("system/course/list/", admin_views.CourseListView.as_view(), name="course_list"),
   path("system/course/<int:pk>/", admin_views.CourseDetailView.as_view(), name="course_detail"),
   path("system/teacher/list/", admin_views.TeacherListView.as_view(), name="teacher_list"),
+  
   
   # TEACHER
   # Teachers
@@ -40,13 +43,15 @@ urlpatterns = [
   path("system/course/task/deliveries/", teacher_views.DeliveryByTaskView.as_view(), name="deliveries_list"),
   
   
-  # Inscripción a cursos
-  path("system/student/enroll/<int:pkC>/<int:pkE>/", views.CoursesOfAStudentView.as_view(), name="enroll-student"), 
-  
-  # Estudiantes
-  path("system/student/<int:pk>/courses/", views.StudentMyCourses.as_view(), name="student_mycourses"),
-  path("system/student/<int:student_id>/assigned_tasks/", views.AssignedTasksView.as_view(), name="assigned_tasks"),
-  path("system/student/<int:user_id>/delivery/", views.CreateorUpdateEntregaView.as_view(), name="create_or_update_entrega"),
+  # STUDENT
+  # inscripción a cursos
+  path("system/student/enroll/<int:pkC>/<int:pkE>/", student_views.CoursesOfAStudentView.as_view(), name="enroll-student"),
+  # my courses
+  path("system/student/<int:pk>/courses/", student_views.StudentMyCourses.as_view(), name="student_mycourses"),
+  # tareas asignadas a un estudiante
+  path("system/student/<int:student_id>/assigned_tasks/", student_views.AssignedTasksView.as_view(), name="assigned_tasks"),
+  # entregas
+  path("system/student/<int:user_id>/delivery/", student_views.CreateorUpdateEntregaView.as_view(), name="create_or_update_entrega"),
   
 ]
 
