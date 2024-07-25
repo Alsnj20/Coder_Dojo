@@ -16,10 +16,17 @@ function HomeFooter() {
             <i className="text-3xl text-text-light bx bx-code-alt"></i> Coder Dojo
           </span>
         </div>
-        <nav className="flex flex-col md:flex-row gap-4 font-bold dark:text-text-light">
-          <a href="#" className="hover:border-b-2 border-text-light">Home</a>
-          <a href="#" className="hover:border-b-2 border-text-light ">Cursos</a>
-          <a href="#" className="hover:border-b-2 border-text-light">Tareas</a>
+        <nav className="flex flex-col items-center
+        md:flex-row gap-4 font-bold dark:text-text-light">
+          <a href="/" className="
+          border-b-2 border-transparent
+        hover:border-text-light">Home</a>
+          <a href="#" className="
+          border-b-2 border-transparent
+        hover:border-text-light">Cursos</a>
+          <a href="#" className="
+          border-b-2 border-transparent
+        hover:border-text-light">Tareas</a>
         </nav>
         <div className="flex flex-col items-center md:items-start gap-4 font-bold dark:text-text-light">
           <p>Redes Sociales</p>

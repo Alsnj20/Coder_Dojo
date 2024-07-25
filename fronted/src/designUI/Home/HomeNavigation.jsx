@@ -21,9 +21,19 @@ function HomeNavigation({ isDarkMode, setIsDarkMode }) {
       animate-open-menu md:animate-none
       z-50 md:z-auto`
       }>
-        <a href="#" className="font-semibold hover:border-b-2 border-primary-light dark:border-text-dark">Home</a>
-        <a href="#" className="font-semibold hover:border-b-2 border-primary-light dark:border-text-dark">Nosotros</a>
-        <a href="#" className="font-semibold hover:border-b-2 border-primary-light dark:border-text-dark">Más Información</a>
+        <a href="#" className="font-semibold
+        border-b-2 border-transparent
+        hover:border-primary-light
+        dark:hover:border-text-light
+        ">Home</a>
+        <a href="#" className="font-semibold
+        border-b-2 border-transparent
+        hover:border-primary-light
+        dark:hover:border-text-light">Nosotros</a>
+        <a href="#" className="font-semibold
+        border-b-2 border-transparent
+        hover:border-primary-light
+        dark:hover:border-text-light">Más Información</a>
         <Button text="Register" icon="bx bx-user-plus" url='register/' />
         <Button text="Login" icon="bx bx-log-in" url='login/' />
       </nav>

@@ -26,12 +26,20 @@ function AdminNavigation({ isDarkMode, setIsDarkMode }) {
       animate-open-menu md:animate-none
       z-50 md:z-auto`
       }>
-        <a href="#" className="font-semibold hover:border-b-2 border-primary-light dark:border-text-dark">Cursos</a>
-        <a href="#" className="font-semibold hover:border-b-2 border-primary-light dark:border-text-dark">Usuarios</a>
-        <div className="flex items-center gap-2">
+        <a href="#" className="font-semibold
+        border-b-2 border-transparent
+        hover:border-primary-light
+        dark:hover:border-text-light
+        ">Cursos</a>
+        <a href="#" className="font-semibold
+        border-b-2 border-transparent
+        hover:border-primary-light
+        dark:hover:border-text-light
+        ">Usuarios</a>
+        <a className="flex items-center gap-2">
           <i className="text-gray-700 rounded-full bg-gray-300 bx bx-user p-2"></i>
           <span>Bienvenido, {user.name}</span>
-        </div>
+        </a>
       </nav>
       <div className="flex items-center gap-4">
         <Button onClick={logout}
