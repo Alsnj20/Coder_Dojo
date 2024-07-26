@@ -8,3 +8,9 @@ __pycache__/
 
 # Node modules
 frontend/node_modules/
+
+# Latex
+Latex/_minted-*
+Latex/build/*
+Latex/*.log
+.aux
