@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "coderdojo/wsgi.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "coderdojo/wsgi.py"
+    }
+  ]
+}
