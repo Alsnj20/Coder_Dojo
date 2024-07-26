@@ -58,11 +58,8 @@ MIDDLEWARE = [
 ]
 
 # CORS
-CORS_ORGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWS_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -91,7 +88,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'coderdojo.wsgi.application'
+WSGI_APPLICATION = 'coderdojo.wsgi.app'
 
 
 # Database
