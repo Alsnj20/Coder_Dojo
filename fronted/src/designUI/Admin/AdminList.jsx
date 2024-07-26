@@ -18,7 +18,7 @@ function AdminList() {
 
   const handleDelete = async (userId) => {
     try {
-      await axios.delete(`http://localhost:8000/system/user/${userId}/`);
+      await axios.delete(`https://coderdojo-backend.vercel.app/system/user/${userId}/`);
       // Actualiza la lista de usuarios después de eliminar
       location.state.users = users.filter(user => user.id !== userId);
       setUsers(users.filter(user => user.id !== userId));
@@ -30,7 +30,7 @@ function AdminList() {
   const handleSubmitEdit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:8000/system/user/${editingUser.id}/`, formData);
+      const response = await axios.put(`https://coderdojo-backend.vercel.app/system/user/${editingUser.id}/`, formData);
       const updatedUser = response.data;
       // Actualiza la lista de usuarios
       const updatedUsers = users.map(user => (user.id === updatedUser.id ? updatedUser : user));

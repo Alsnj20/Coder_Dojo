@@ -28,7 +28,7 @@ function AdminCourseCard() {
     console.log(courses);
     console.log(id);
     try {
-      await axios.delete(`http://localhost:8000/system/course/${id}/`);
+      await axios.delete(`https://coderdojo-backend.vercel.app/system/course/${id}/`);
       location.state.courses = courses.filter(course => course.id !== id);
       setCourses(courses.filter(course => course.id !== id));
       alert('Curso eliminado exitosamente');
@@ -40,7 +40,7 @@ function AdminCourseCard() {
   const handleSubmitEdit = async (e) => {
     e.preventDefault();
     try{
-      const response = await axios.put(`http://localhost:8000/system/course/${editingCourse.id}/`, formData);
+      const response = await axios.put(`https://coderdojo-backend.vercel.app/system/course/${editingCourse.id}/`, formData);
       const updatedCourse = response.data;
       const updatedCourses = courses.map(course => (course.id === updatedCourse.id ? updatedCourse : course));
       setCourses(courses.map(course => (course.id === updatedCourse.id ? updatedCourse : course)));

@@ -20,7 +20,7 @@ function LoginUser(){
     e.preventDefault();
     const { email, password } = formData;
     try {
-      const response = await axios.post('http://localhost:8000/system/user/login/', { email, password });
+      const response = await axios.post('https://coderdojo-backend.vercel.app/system/user/login/', { email, password });
       const access = response.data.access_token;
       const refresh = response.data.refresh_token;
       const user = response.data.user;

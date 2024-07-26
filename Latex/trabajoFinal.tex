@@ -336,10 +336,10 @@ Componente que se muestra cuando un usuario intenta acceder a una página sin lo
 \inputminted{javascript}{../fronted/src/components/AccessDenied.jsx}
 \subsection{Components}
 \subsubsection{RegisterUser}
-El componente RegisterUser realiza dos solicitudes principales: primero, envía una solicitud POST a http://localhost:8000/system/user/register/ para registrar un nuevo usuario con los datos del formulario (email, name, tipo, password). Una vez registrado, realiza otra solicitud POST a http://localhost:8000/system/user/login/ para iniciar sesión con las credenciales del usuario recién registrado (email y password). Esto permite al usuario registrarse e iniciar sesión de inmediato, obteniendo así los tokens de acceso necesarios para la autenticación.
+El componente RegisterUser realiza dos solicitudes principales: primero, envía una solicitud POST a https://coderdojo-backend.vercel.app/system/user/register/ para registrar un nuevo usuario con los datos del formulario (email, name, tipo, password). Una vez registrado, realiza otra solicitud POST a https://coderdojo-backend.vercel.app/system/user/login/ para iniciar sesión con las credenciales del usuario recién registrado (email y password). Esto permite al usuario registrarse e iniciar sesión de inmediato, obteniendo así los tokens de acceso necesarios para la autenticación.
 \inputminted{javascript}{../fronted/src/components/RegisterUser.jsx}
 \subsubsection{LoginUser}
-El componente LoginUser realiza una solicitud POST a http://localhost:8000/system/user/login/ para iniciar sesión con las credenciales del usuario (email y password). Una vez iniciada la sesión, el componente almacena los tokens de acceso y refresco en el almacenamiento local del navegador, lo que permite al usuario permanecer autenticado incluso después de cerrar la página.
+El componente LoginUser realiza una solicitud POST a https://coderdojo-backend.vercel.app/system/user/login/ para iniciar sesión con las credenciales del usuario (email y password). Una vez iniciada la sesión, el componente almacena los tokens de acceso y refresco en el almacenamiento local del navegador, lo que permite al usuario permanecer autenticado incluso después de cerrar la página.
 \inputminted{javascript}{../fronted/src/components/LoginUser.jsx}
 
 \subsection{Home}
@@ -372,16 +372,16 @@ El componente Admin muestra la página de inicio del administrador, contiene sub
 El componente AdminNavigation muestra la barra de navegación de la página de inicio del administrador, contiene un menú de navegación con enlaces a las diferentes secciones de la página, nuestro usuario y un botón de cierre de sesión.
 \inputminted{javascript}{../fronted/src/designUI/Admin/AdminNavigation.jsx}
 \subsubsection{AdminMain}
-El componente AdminMain muestra la sección principal de la página de inicio del administrador, donde se muestra dos secciones (Users, Courses), los cuales a traves del boton de ver nos redirige a la lista de usuarios y cursos correspondiente. Hacemos dos solicitudes a http://localhost:8000/system/user/list/ y http://localhost:8000/system/course/list/ para obtener la lista de usuarios y cursos.
+El componente AdminMain muestra la sección principal de la página de inicio del administrador, donde se muestra dos secciones (Users, Courses), los cuales a traves del boton de ver nos redirige a la lista de usuarios y cursos correspondiente. Hacemos dos solicitudes a https://coderdojo-backend.vercel.app/system/user/list/ y https://coderdojo-backend.vercel.app/system/course/list/ para obtener la lista de usuarios y cursos.
 \inputminted{javascript}{../fronted/src/designUI/Admin/AdminMain.jsx}
 \subsubsection{AdminList}
-El componente AdminList muestra la lista de usuarios en forma de una tabla, donde cada fila contiene un icon edit o remove, el cual nos permite editar o eliminar un usuario. Tenemos dos método handleSubmitEdit y handleRemove, el cual nos permite editar o eliminar un usuario, haciendo uso de las solicitudes http://localhost:8000/system/user/\${editingUser.id}/ y http://localhost:8000/system/user/\${userId}/.
+El componente AdminList muestra la lista de usuarios en forma de una tabla, donde cada fila contiene un icon edit o remove, el cual nos permite editar o eliminar un usuario. Tenemos dos método handleSubmitEdit y handleRemove, el cual nos permite editar o eliminar un usuario, haciendo uso de las solicitudes https://coderdojo-backend.vercel.app/system/user/\${editingUser.id}/ y https://coderdojo-backend.vercel.app/system/user/\${userId}/.
 \inputminted{javascript}{../fronted/src/designUI/Admin/AdminList.jsx}
 \subsubsection{AdminCourseCard}
-El componente AdminCourseCard muestra la lista de cursos en forma de una tarjeta, donde cada tarjeta contiene dos botones edit y remove, los cuales nos van a permitir editar o eliminar un curso. Tenemos tres métodos searchTeacher, handleDeleteCourse y handleSubmitEdit, el primero nos permite listar a los profesores, el segundo nos permite eliminar un curso y el tercero editar, todo esto haciendo uso de las solicitudes http://localhost:8000/system/course/\${id}/ y http://localhost:8000/system/course/\${editingCourse.id}/
+El componente AdminCourseCard muestra la lista de cursos en forma de una tarjeta, donde cada tarjeta contiene dos botones edit y remove, los cuales nos van a permitir editar o eliminar un curso. Tenemos tres métodos searchTeacher, handleDeleteCourse y handleSubmitEdit, el primero nos permite listar a los profesores, el segundo nos permite eliminar un curso y el tercero editar, todo esto haciendo uso de las solicitudes https://coderdojo-backend.vercel.app/system/course/\${id}/ y https://coderdojo-backend.vercel.app/system/course/\${editingCourse.id}/
 \inputminted{javascript}{../fronted/src/designUI/Admin/AdminCourseCard.jsx}
 \subsubsection{AdminCourse}
-El componente AdminCourse muestra el formulario para la creación de un curso, contiene un formulario con los campos name, description, teacher, el cual nos permite crear un curso, haciendo uso de la solicitud http://localhost:8000/system/course/create/ y para filtrar a los profesor http://localhost:8000/system/teacher/list/.
+El componente AdminCourse muestra el formulario para la creación de un curso, contiene un formulario con los campos name, description, teacher, el cual nos permite crear un curso, haciendo uso de la solicitud https://coderdojo-backend.vercel.app/system/course/create/ y para filtrar a los profesor https://coderdojo-backend.vercel.app/system/teacher/list/.
 \inputminted{javascript}{../fronted/src/designUI/Admin/AdminCourse.jsx}
 
 \subsection{Teacher}
@@ -392,13 +392,13 @@ El componente Teacher muestra la página de inicio del profesor, contiene subcom
 El componente TeacherNavigation muestra la barra de navegación de la página de inicio del profesor, contiene un menú de navegación con enlaces a las diferentes secciones de la página, nuestro usuario y un botón de cierre de sesión.
 \inputminted{javascript}{../fronted/src/designUI/Teacher/TeacherNavigation.jsx}
 \subsubsection{TeacherMain}
-El componente TeacherMain muestra la sección principal de la página de inicio del profesor, donde se nos muestra la lista de cursos que enseña, los cuales a traves del boton de ver nos redirige a ver el curso de forma mas detallada. Hacemos una solicitud a http://localhost:8000/teacher/course/\${user.id}/ para obtener la lista de cursos.
+El componente TeacherMain muestra la sección principal de la página de inicio del profesor, donde se nos muestra la lista de cursos que enseña, los cuales a traves del boton de ver nos redirige a ver el curso de forma mas detallada. Hacemos una solicitud a https://coderdojo-backend.vercel.app/teacher/course/\${user.id}/ para obtener la lista de cursos.
 \inputminted{javascript}{../fronted/src/designUI/Teacher/TeacherMain.jsx}
 
 \begin{itemize}
-	\item \textbf{TeacherCourse:} El componente TeacherCourse muestra la lista de tareas, nos permite crear una asignar una tareas, hacemos uso del subcomponente task. Hacemos solicitudes http://localhost:8000/system/course/\${course.id}/task/list/, http://localhost:8000/system/course/\${course.id}/task/assign/\newline
+	\item \textbf{TeacherCourse:} El componente TeacherCourse muestra la lista de tareas, nos permite crear una asignar una tareas, hacemos uso del subcomponente task. Hacemos solicitudes https://coderdojo-backend.vercel.app/system/course/\${course.id}/task/list/, https://coderdojo-backend.vercel.app/system/course/\${course.id}/task/assign/\newline
 	      \inputminted{javascript}{../fronted/src/designUI/Teacher/TeacherCourse.jsx}
-	\item \textbf{Task:} El componente Task nos permite ver la entregas de esa tarea al momento de asignarla, asi como calificar las entregas. Todo esto a traves de las solicitudes http://localhost:8000/system/course/task/deliveries/ y http://localhost:8000/system/course/task/deliveries/grade/\newline
+	\item \textbf{Task:} El componente Task nos permite ver la entregas de esa tarea al momento de asignarla, asi como calificar las entregas. Todo esto a traves de las solicitudes https://coderdojo-backend.vercel.app/system/course/task/deliveries/ y https://coderdojo-backend.vercel.app/system/course/task/deliveries/grade/\newline
 	      \inputminted{javascript}{../fronted/src/designUI/Teacher/Task.jsx}
 \end{itemize}
 
@@ -410,7 +410,7 @@ El componente Student muestra la página de inicio del estudiante, contiene subc
 El componente StudentNavigation muestra la barra de navegación de la página de inicio del estudiante, contiene un menú de navegación con enlaces a las diferentes secciones de la página, nuestro usuario y un botón de cierre de sesión.
 \inputminted{javascript}{../fronted/src/designUI/Student/StudentNavigation.jsx}
 \subsubsection{StudentMain}
-El componente StudentMain funciona como un dashboard, donde se muestra todo los cursos (Inscritos o Inscribirse), los cursos inscritos como tal, tareas asignadas de todos los cursos y tareas enviadas de todos los cursos. Para esto hacemos uso de las solicitudes http://localhost:8000/system/course/list/ http://localhost:8000/system/student/enroll/\${courseId}/\${user.id}/ (inscribirse a un curso), http://localhost:8000/system/student/\${user.id}/courses/, etc.
+El componente StudentMain funciona como un dashboard, donde se muestra todo los cursos (Inscritos o Inscribirse), los cursos inscritos como tal, tareas asignadas de todos los cursos y tareas enviadas de todos los cursos. Para esto hacemos uso de las solicitudes https://coderdojo-backend.vercel.app/system/course/list/ https://coderdojo-backend.vercel.app/system/student/enroll/\${courseId}/\${user.id}/ (inscribirse a un curso), https://coderdojo-backend.vercel.app/system/student/\${user.id}/courses/, etc.
 \inputminted{javascript}{../fronted/src/designUI/Student/StudentMain.jsx}
 
 \subsection{App}

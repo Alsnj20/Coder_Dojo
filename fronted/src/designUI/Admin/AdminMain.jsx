@@ -16,7 +16,7 @@ function AdminMain() {
         navigate('access-denied/');
       } else {
         try {
-          const response = await axios.get('http://localhost:8000/system/user/list/', {
+          const response = await axios.get('https://coderdojo-backend.vercel.app/system/user/list/', {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -38,7 +38,7 @@ function AdminMain() {
 
   const handleGetCourses = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/system/course/list/');
+      const response = await axios.get('https://coderdojo-backend.vercel.app/system/course/list/');
       setCourses(response.data);
       console.log("Users", users);
       navigate('/admin/courses', { state: { courses: response.data, users } });

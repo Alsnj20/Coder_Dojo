@@ -11,7 +11,7 @@ function AdminCourse() {
   useEffect(() => {
     const getTeachers = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/system/teacher/list/');
+        const response = await axios.get('https://coderdojo-backend.vercel.app/system/teacher/list/');
         setTeachers(response.data);
       } catch (error) {
         console.log(error);
@@ -23,7 +23,7 @@ function AdminCourse() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/system/course/create/', {
+      const response = await axios.post('https://coderdojo-backend.vercel.app/system/course/create/', {
         nombre: title,
         descripcion: description,
         docente: teacher

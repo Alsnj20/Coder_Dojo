@@ -10,7 +10,7 @@ function  TeacherMain() {
   useEffect(() => {
     const getCursos = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/system/teacher/course/${user.id}/`)
+        const response = await axios.get(`https://coderdojo-backend.vercel.app/system/teacher/course/${user.id}/`)
         setCursos(response.data)
       } catch (error) {
         console.error('Error al obtener los cursos:', error)

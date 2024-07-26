@@ -14,7 +14,7 @@ function TeacherCourse() {
   useEffect(() => {
     const getTasks = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/system/course/${course.id}/task/list/`);
+        const response = await axios.get(`https://coderdojo-backend.vercel.app/system/course/${course.id}/task/list/`);
         console.log(response.data);
         setTasks(response.data); // Guarda las tareas en el estado
       } catch (error) {
@@ -26,7 +26,7 @@ function TeacherCourse() {
 
   const handleAssignTask = async (taskId) => {
     try {
-      const response = await axios.post(`http://localhost:8000/system/course/${course.id}/task/assign/`, { task_id: taskId });
+      const response = await axios.post(`https://coderdojo-backend.vercel.app/system/course/${course.id}/task/assign/`, { task_id: taskId });
       alert('Tarea asignada correctamente');
       console.log(response.data);
       window.location.reload();

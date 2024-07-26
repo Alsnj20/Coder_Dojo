@@ -25,7 +25,7 @@ function RegisterUser() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/system/user/register/', formData);
+      const response = await axios.post('https://coderdojo-backend.vercel.app/system/user/register/', formData);
       console.log('Usuario registrado:', response.data);
       formDataLogin.email = formData.email;
       formDataLogin.password = formData.password;
@@ -39,7 +39,7 @@ function RegisterUser() {
     e.preventDefault();
     const { email, password } = formDataLogin;
     try {
-      const response = await axios.post('http://localhost:8000/system/user/login/', { email, password });
+      const response = await axios.post('https://coderdojo-backend.vercel.app/system/user/login/', { email, password });
       const access = response.data.access_token;
       const refresh = response.data.refresh_token;
       const user = response.data.user;

@@ -13,7 +13,7 @@ function TeacherCreateTask({ cursoId }) {
     e.preventDefault();
     console.log(title, description, date, cursoId)
     try {
-      const response = await axios.post(`http://localhost:8000/system/course/${cursoId}/task/create/`, {
+      const response = await axios.post(`https://coderdojo-backend.vercel.app/system/course/${cursoId}/task/create/`, {
         nombre: title,
         descripcion: description,
         fecha_entrega: date,

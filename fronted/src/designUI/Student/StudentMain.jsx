@@ -13,7 +13,7 @@ function StudentMain() {
   useEffect(() => {
     const getCursos = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/system/course/list/`)
+        const response = await axios.get(`https://coderdojo-backend.vercel.app/system/course/list/`)
         setCursos(response.data)
       } catch (error) {
         console.error('Error al obtener los cursos:', error)
@@ -25,7 +25,7 @@ function StudentMain() {
   const enrollCourse = async (courseId) => {
     console.log('Enroll course:', courseId)
     try {
-      const response = await axios.post(`http://localhost:8000/system/student/enroll/${courseId}/${user.id}/`)
+      const response = await axios.post(`https://coderdojo-backend.vercel.app/system/student/enroll/${courseId}/${user.id}/`)
       console.log("Cambios " + response.data)
       window.location.reload();
     } catch (error) {
@@ -42,7 +42,7 @@ function StudentMain() {
   useEffect(() => {
     const getMyCourses = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/system/student/${user.id}/courses/`)
+        const response = await axios.get(`https://coderdojo-backend.vercel.app/system/student/${user.id}/courses/`)
         setMisCursos(response.data)
       } catch (error) {
         console.error('Error al obtener mis cursos:', error)
@@ -54,7 +54,7 @@ function StudentMain() {
   useEffect(() => {
     const getAssignedTasks = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/system/student/${user.id}/assigned_tasks/`, { user_id: user.id })
+        const response = await axios.get(`https://coderdojo-backend.vercel.app/system/student/${user.id}/assigned_tasks/`, { user_id: user.id })
         console.log("Asignadas", response.data)
         setEntregasAsignadas(response.data)
       } catch (error) {
@@ -64,7 +64,7 @@ function StudentMain() {
 
     const getSubmittedTasks = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/system/student/${user.id}/submitted_tasks/`)
+        const response = await axios.get(`https://coderdojo-backend.vercel.app/system/student/${user.id}/submitted_tasks/`)
         console.log("Entregas", response.data)
         setEntregasEnviadas(response.data)
       } catch (error) {
@@ -82,7 +82,7 @@ function StudentMain() {
       return
     }
     try {
-      const response = await axios.post(`http://localhost:8000/system/student/${user.id}/delivery/`, { tarea: taskId, url: url })
+      const response = await axios.post(`https://coderdojo-backend.vercel.app/system/student/${user.id}/delivery/`, { tarea: taskId, url: url })
       alert('Entrega enviada correctamente')
       console.log(response.data)
       window.location.reload();

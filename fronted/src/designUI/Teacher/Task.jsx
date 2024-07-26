@@ -8,7 +8,7 @@ export function Task({ task = {}, handleAssignTask }) {
 
   const loadDeliveries = async (taskId) => {
     try {
-      const response = await axios.post(`http://localhost:8000/system/course/task/deliveries/`, { task_id: taskId });
+      const response = await axios.post(`https://coderdojo-backend.vercel.app/system/course/task/deliveries/`, { task_id: taskId });
       console.log(response.data);
       setEntregas(response.data);
     } catch (error) {
@@ -19,7 +19,7 @@ export function Task({ task = {}, handleAssignTask }) {
   const submitGrade = async (deliveryId, grade) => {
     console.log(deliveryId, grade);
     try {
-      const response = await axios.post(`http://localhost:8000/system/course/task/deliveries/grade/`, { delivery_id: deliveryId, grade: parseInt(grade) });
+      const response = await axios.post(`https://coderdojo-backend.vercel.app/system/course/task/deliveries/grade/`, { delivery_id: deliveryId, grade: parseInt(grade) });
       console.log(response.data);
       window.location.reload();
     } catch (error) {
