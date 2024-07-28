@@ -43,10 +43,6 @@ Como estudiante, puedes interactuar con los cursos y las tareas asignadas. Tus f
 - **Autenticación**: JWT
 - **Despliegue**: Vercel
 
-## Licencia
-
-Este proyecto está licenciado bajo la Licencia de Yo.
-
 ## Requisitos
 - Python 3.12
 - Django 5.0.6
@@ -87,3 +83,46 @@ El modelo de la base de datos se compone de las siguientes tabla:
 
 ## Deploy
 El proyecto se encuentra desplegado en Vercel. Puedes acceder a la plataforma en el siguiente enlace: [Coder Dojo](https://coder-dojo-seven.vercel.app/)
+
+## Videos de Demostración
+A continuación, se presentan los videos pedidos para la demostración del proyecto:
+### Video Completo (10 min)
+[![Video Completo](https://img.youtube.com/vi/1J9J9J9J9J9/0.jpg)](https://www.youtube.com/watch?v=1J9J9J9J9J9)
+
+### Video Corto (3 min)
+[![Video Corto](https://img.youtube.com/vi/2J9J9J9J9J9/0.jpg)](https://www.youtube.com/watch?v=2J9J9J9J9J9)
+
+### Videos por Secciones
+#### Django y Django Rest Framework
+[Video sobre Django y Django Rest Framework](https://drive.google.com/file/d/1IwICsxv2ng5J8x_7g-c_PjXPnovIFBDB/view?usp=drive_link)
+
+#### React Forms y Tokens
+[Video sobre React Forms](https://drive.google.com/file/d/11cg7UKkr4TR0HIjZew1RMHDmf00UzJN2/view?usp=drive_link)
+
+#### React Router y Context
+[Video sobre React Router y Context](https://drive.google.com/file/d/15wtPWxNrpnk0ndUUPvUBQHkC4tzlp-px/view?usp=drive_link)
+
+#### Tailwind CSS
+[Video sobre Tailwind CSS](https://drive.google.com/file/d/121oxUtZhacTHBSXWGcIaF2yDXpNmjjS9/view?usp=drive_link)
+
+#### Presentación de la Pagina
+[Video sobre la Presentación de la Pagina](https://drive.google.com/file/d/15S0j8EIZ84pygugreo_KbZQbQEH_3v00/view?usp=drive_link)
+
+#### Despliegue en Vercel y Supabase
+[Video sobre el Despliegue en Vercel y Supabase](https://drive.google.com/file/d/1MMvEIS0UoXb0SxEsBF3qPlDPDcUDIryV/view?usp=drive_link)
+
+## Documentos Requeridos
+### Articulo
+[Articulo](https://drive.google.com/file/d/1RBBXgxog0BKj4KQ2emMDfXBOd8U-Q2II/view?usp=drive_link)
+
+### Diapositivas Utilizadas en los Videos
+[Diapositivas](https://drive.google.com/file/d/1ocgg8y7zg5FJU7JHApNJ3UsHsxyV6aMD/view?usp=drive_link)
+
+### Poster de Presentación
+[Poster](https://drive.google.com/file/d/1qfQIgQ468WL0A-C5r2e26A-HMabl_0-k/view?usp=drive_link)
+
+## Autora
+- Mariel Alisson Jara Mamani
+
+## Licencia
+Este proyecto es software propietario y su uso está restringido a los términos y condiciones establecidos por el autor. Para más información, por favor contactar a la autora del proyecto. Todos los derechos reservados.
