@@ -1,4 +1,5 @@
-# Coder_Dojo
+# CoderDojo
+CoderDojo es una plataforma educativa en línea desarrollada para modernizar la gestión de cursos, tareas y usuarios en entornos educativos dedicados a la programación. Este sistema educativo busca hacer el aprendizaje de la programación más accesible y motivador, proporcionando una estructura que incluye cursos, tareas y un sistema de calificaciones para fomentar la motivación y la disciplina en los estudiantes.
 
 ## Sistema de Gestión Académica
 Existen tres tipos de usuarios: Administrador, Profesor y Estudiante. A continuación se detallan las funcionalidades específicas para cada uno:
@@ -36,19 +37,53 @@ Como estudiante, puedes interactuar con los cursos y las tareas asignadas. Tus f
 
 ### Tecnologías Utilizadas
 
-- **Backend**: Django
+- **Backend**: Django y Django Rest Framework
 - **Frontend**: React
+- **Base de Datos**: Supabase (PostgreSQL)
+- **Autenticación**: JWT
+- **Despliegue**: Vercel
+
 ## Licencia
 
 Este proyecto está licenciado bajo la Licencia de Yo.
 
-## Conexion con el Frontend
+## Requisitos
+- Python 3.12
+- Django 5.0.6
+- Django Rest Framework 3.12.4
+- Django Cors Headers 3.7.0
+- Node.js 14.17.0
+- React 17.0.2
+- PostgreSQL 13.3
 
-1. Instalar las dependencias necesarias (Django Rest Framework y Django Cors Headers):
+## Instalación y Configuración
+1. Clonar el repositorio:
 ```bash
-pip install djangorestframework django-cors-headers
+git clone https://github.com/Alsnj20/Coder_Dojo.git
 ```
-2. Archivo de requerimientos:
+2. Instalar las dependencias del backend:
 ```bash
-pip freeze > requirements.txt
+cd backend/
+pip install -r requirements.txt
 ```
+3. Instalar las dependencias del frontend:
+```bash
+cd ../frontend/
+npm install
+```
+4. Ejecutar el servidor backend:
+```bash
+cd ../backend/
+python manage.py runserver
+```
+5. Ejecutar el servidor frontend:
+```bash
+cd ../frontend/
+npm run dev
+```
+## Modelado de la Base de Datos
+El modelo de la base de datos se compone de las siguientes tabla:
+![Modelo de la Base de Datos](BD.png)
+
+## Deploy
+El proyecto se encuentra desplegado en Vercel. Puedes acceder a la plataforma en el siguiente enlace: [Coder Dojo](https://coder-dojo-seven.vercel.app/)

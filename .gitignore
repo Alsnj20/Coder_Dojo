@@ -14,3 +14,5 @@ Latex/_minted-*
 Latex/build/*
 Latex/*.log
 .aux
+
+backend/coderdojo/settings.py
