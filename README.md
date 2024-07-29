@@ -121,6 +121,14 @@ A continuación, se presentan los videos pedidos para la demostración del proye
 ### Poster de Presentación
 [Poster](https://drive.google.com/file/d/1qfQIgQ468WL0A-C5r2e26A-HMabl_0-k/view?usp=drive_link)
 
+## URLS del proyecto
+- [Proyecto](https://github.com/Alsnj20/Coder_Dojo)
+- [Despliegue](https://coder-dojo-seven.vercel.app/)
+- [Readme](https://github.com/Alsnj20/Coder_Dojo/blob/main/README.md)
+- [Backend](https://github.com/Alsnj20/Coder_Dojo/tree/main/backend)
+- [Frontend](https://github.com/Alsnj20/Coder_Dojo/tree/main/fronted)
+
+
 ## Autora
 - Mariel Alisson Jara Mamani
 
