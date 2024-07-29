@@ -87,10 +87,10 @@ El proyecto se encuentra desplegado en Vercel. Puedes acceder a la plataforma en
 ## Videos de Demostración
 A continuación, se presentan los videos pedidos para la demostración del proyecto:
 ### Video Completo (10 min)
-[![Video Completo](https://img.youtube.com/vi/1J9J9J9J9J9/0.jpg)](https://www.youtube.com/watch?v=1J9J9J9J9J9)
+[Video Completo](https://drive.google.com/file/d/19d4LPdmqNvxFUweG0kpDAIXWvPDopI_x/view?usp=drive_link)
 
 ### Video Corto (3 min)
-[![Video Corto](https://img.youtube.com/vi/2J9J9J9J9J9/0.jpg)](https://www.youtube.com/watch?v=2J9J9J9J9J9)
+[Video Corto](https://drive.google.com/file/d/15S0j8EIZ84pygugreo_KbZQbQEH_3v00/view?usp=drive_link)
 
 ### Videos por Secciones
 #### Django y Django Rest Framework
